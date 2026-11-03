@@ -84,7 +84,7 @@ window.CaseView = (function () {
 
         <section class="cd-next">
           <a class="cd-next__link" href="#/cases/${next.slug}" data-next data-cursor="Ver" style="--c1:${next.colors[0]};--c2:${next.colors[1]}">
-            <div class="cd-next__bg" style="${next.images ? `background-image:linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.5)),url(${next.images.hero})` : ''}"></div>
+            <div class="cd-next__bg" style="${next.images ? `background-image:linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.5)),url(${next.images.card || next.images.hero})` : ''}"></div>
             <span class="cd-next__label">Próximo case</span>
             <span class="cd-next__name">${next.name}</span>
             <span class="cd-next__tag">${next.tag}</span>

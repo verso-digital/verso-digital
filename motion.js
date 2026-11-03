@@ -40,6 +40,7 @@ window.Motion = (function () {
     const m = el.textContent.trim().match(/^([^\d]*)(\d[\d.]*)(.*)$/);
     if (!m) return null;
     const [, pre, num, post] = m;
+    if (/[a-z]/i.test(pre + post)) return null;   // "B2B" is a name, not a number to count
     const end = parseFloat(num.replace('.', ''));
     const obj = { v: 0 };
     const paint = () => { el.textContent = pre + Math.round(obj.v) + post; };

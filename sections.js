@@ -29,7 +29,7 @@ function buildSections() {
     <article class="case ${cls}" data-cursor="Ver" data-index="${index}">
       <a class="case__link" href="#/cases/${p.slug}" aria-label="Ver o case ${p.name}">
         <div class="case__media" style="--c1:${p.colors[0]};--c2:${p.colors[1]}">
-          <div class="case__img ph-${p.images ? 'photo' : 'none'}" style="${p.images ? `background-image:url(${p.images.hero});--focus:${Math.round(p.images.focus * 100)}%` : ''}"></div>
+          <div class="case__img ph-${p.images ? 'photo' : 'none'}" style="${p.images ? `background-image:url(${p.images.card || p.images.hero});--focus:${p.images.card ? 50 : Math.round(p.images.focus * 100)}%` : ''}"></div>
           ${p.images ? '' : '<span class="case__ph">Imagem do case</span>'}
           <div class="case__stat"><b>${p.stat.value}</b><span>${p.stat.label}</span></div>
         </div>
