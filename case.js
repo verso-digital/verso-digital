@@ -39,7 +39,7 @@ window.CaseView = (function () {
     const sections = d.sections.map((s, k) => `
       <section class="cd-sec ${k % 2 ? 'cd-sec--flip' : ''}">
         <div class="cd-sec__img">
-          <div class="cd-img" data-bend style="${tone(k)}">
+          <div class="cd-img ${s.image ? 'is-photo' : ''}" data-bend style="${tone(k)}${s.image && p.imageRatio ? `;--ar:${p.imageRatio}` : ''}">
             <div class="cd-img__in ${s.image ? 'has-photo' : ''}" style="${s.image ? `background-image:url(${s.image})` : ''}"></div>
             ${s.image ? '' : `<span class="cd-img__ph">Imagem · ${p.name} · ${pad(k + 2)}</span>`}
           </div>
@@ -116,7 +116,7 @@ window.CaseView = (function () {
     $$('.cd-sec', content).forEach((sec) => {
       const img = $('.cd-img', sec);
       track(gsap.from(img, { clipPath: 'inset(0 0 100% 0)', duration: 1.4, ease: 'expo.out', scrollTrigger: st({ trigger: sec, start: 'top 72%' }) }));
-      track(gsap.fromTo($('.cd-img__in', sec), { yPercent: -7, scale: 1.12 }, { yPercent: 7, scale: 1.12, ease: 'none', scrollTrigger: st({ trigger: sec, start: 'top bottom', end: 'bottom top', scrub: true }) }));
+      track(gsap.fromTo($('.cd-img__in', sec), { yPercent: -3, scale: 1.05 }, { yPercent: 3, scale: 1.05, ease: 'none', scrollTrigger: st({ trigger: sec, start: 'top bottom', end: 'bottom top', scrub: true }) }));
       track(gsap.from($('.cd-sec__text', sec).children, { y: 34, opacity: 0, duration: 1.1, ease: 'power3.out', stagger: 0.1, scrollTrigger: st({ trigger: sec, start: 'top 62%' }) }));
     });
     const big = $('.cd-result__big', content);

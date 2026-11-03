@@ -166,7 +166,9 @@ window.PROJECTS = [
 // repeat and be swapped freely). `hero` feeds the carousel card, the case card and the first screen
 // of the case page; `focus` is where, vertically, a wide crop of a tall photo should centre.
 const PHOTO_FOCUS = { 'all-pendre': 0.5, cantao: 0.12, sens8: 0.5, cinco: 0.5, 'oficina-ceramica': 0.4, 'estudio-ilha': 0.5, velle: 0.5 };
+const PHOTO_RATIO = { sens8: 1 };   // width / height of a case's section pictures, when they are not the usual 4:5
 PROJECTS.forEach((p) => {
+  if (PHOTO_RATIO[p.slug]) p.imageRatio = PHOTO_RATIO[p.slug];
   p.images = { hero: `assets/cases/${p.slug}-hero.jpg`, focus: PHOTO_FOCUS[p.slug] };
   p.detail.sections.forEach((s, k) => { s.image = `assets/cases/${p.slug}-s${k + 1}.jpg`; });
 });

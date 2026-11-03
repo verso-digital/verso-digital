@@ -390,6 +390,14 @@ html.is-loading .footer { visibility: hidden; }
     radial-gradient(circle at 70% 25%, rgba(255, 255, 255, 0.26), transparent 55%),
     linear-gradient(var(--a, 135deg), var(--c1), var(--c2));
 }
+/* a real photo or post keeps its own proportions (so posts with lettering are never cut): the box is as tall as the
+   window allows and as wide as the picture needs, set to the column's near or far edge */
+.cd-sec__img { display: flex; justify-content: flex-start; }
+.cd-sec--flip .cd-sec__img { justify-content: flex-end; }
+.cd-img.is-photo {
+  --ar: 0.8; height: auto; aspect-ratio: var(--ar);
+  width: min(100%, calc(min(78svh, 780px) * var(--ar)));
+}
 .cd-img__ph { position: absolute; left: 20px; top: 18px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255, 255, 255, 0.72); }
 
 .cd-kicker { display: flex; align-items: center; gap: 12px; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-dim); }
@@ -432,6 +440,8 @@ html.is-loading .footer { visibility: hidden; }
   .cd-sec__img, .cd-sec--flip .cd-sec__img { order: 1; }
   .cd-sec__text, .cd-sec--flip .cd-sec__text { order: 2; }
   .cd-img { height: 52svh; }
+  .cd-img.is-photo { height: auto; width: 100%; max-width: 520px; }
+  .cd-sec__img, .cd-sec--flip .cd-sec__img { justify-content: center; }
   .cd-result { grid-template-columns: 1fr; min-height: 0; }
 }
 
@@ -622,7 +632,7 @@ html.menu-open .island .island__edge path { stroke: rgba(255, 255, 255, 0.2); }
 
 /* ---------- real photos ---------- */
 .case__img.ph-photo { background-size: cover; background-position: center var(--focus, 50%); }
-.cd-img__in.has-photo { background-size: cover; background-position: center; }
+.cd-img__in.has-photo { inset: -2%; background-size: cover; background-position: center; }
 .cd-next__bg { background-size: cover; background-position: center; }
 
 /* ---------- menu: taps and swipes ---------- */
