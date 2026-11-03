@@ -94,12 +94,78 @@ window.PROJECTS = [
       result: { big: 'Grid', text: 'awareness constante, sem diluir a identidade da marca.' },
     },
   },
+  {
+    name: 'A Oficina Cerâmica',
+    slug: 'oficina-ceramica',
+    short: { headline: ['Histórias','em argila.'] },   // phones: a shorter headline
+    tag: 'Social media',
+    colors: ['#3b2418', '#c8553a'],
+    headline: ['Histórias que', 'começam na argila.'],
+    sub: 'Conteúdo que convida a entrar no ateliê.',
+    cta: 'Ver case',
+    stat: { value: 'Argila', label: 'posts que contam a história de quem faz cerâmica' },
+    text: 'Um perfil de ateliê que fala de artistas e de recomeços. Cada post conta uma história e termina com um convite: venha fazer cerâmica com a gente.',
+    detail: {
+      lead: 'Um ateliê de cerâmica com muita história para contar. Criamos posts de artista que transformam biografias e peças em conteúdo que convida o público a começar a sua própria história com a argila.',
+      services: ['Social media', 'Direção criativa', 'Design', 'Conteúdo'],
+      sections: [
+        { kicker: 'A ideia', title: 'Contar a vida de quem trabalha com argila', text: 'Em vez de mostrar só peças, partimos das pessoas. Cada post apresenta uma ceramista, sua trajetória e o que a aproxima do ofício.' },
+        { kicker: 'O convite', title: 'Toda história termina numa porta aberta', text: 'Os textos curtos, em letras grandes sobre a imagem, fecham sempre com um chamado: a oficina tem um lugar para quem quer começar.' },
+        { kicker: 'O olhar', title: 'Peças, mãos e tons de terra', text: 'Fotos em preto e branco, tons quentes e objetos em destaque. Uma linguagem calma, que combina com o tempo do ateliê.' },
+      ],
+      result: { big: 'Argila', text: 'um perfil que transforma biografias e peças em convite para fazer cerâmica.' },
+    },
+  },
+  {
+    name: 'Estúdio Ilha',
+    slug: 'estudio-ilha',
+    short: { headline: ['Uma ilha','em azul.'] },   // phones: a shorter headline
+    tag: 'Branding e direção criativa',
+    colors: ['#1a1f9c', '#dfe6f7'],
+    headline: ['Um estúdio', 'todo em azul.'],
+    sub: 'Campanha, cenário e acervo.',
+    cta: 'Ver case',
+    stat: { value: 'O.U.I', label: 'campanha de fragrância e acervo de cenário' },
+    text: 'Um estúdio de objetos e cenários com identidade em azul cobalto. Da campanha de fragrância ao acervo catalogado, tudo na mesma linguagem.',
+    detail: {
+      lead: 'Um estúdio de objetos e cenários que precisava de uma identidade tão marcante quanto o seu acervo. Criamos peças em azul cobalto, com tipografia grande e imagens tratadas em duotone.',
+      services: ['Branding', 'Direção criativa', 'Design', 'Campanha'],
+      sections: [
+        { kicker: 'A identidade', title: 'Um azul só, aplicado com coragem', text: 'O nome em letras enormes, o azul cobalto e um símbolo simples. A marca se reconhece antes mesmo de ser lida.' },
+        { kicker: 'O acervo', title: 'Objetos de cenário, catalogados', text: 'Poltronas, espelhos, luminárias e toca-discos organizados como um inventário ilustrado: cada objeto com nome e origem.' },
+        { kicker: 'O ambiente', title: 'Cenas que parecem imagens de arquivo', text: 'Fotos tratadas em duotone azul e composições com moldura mostram o estúdio como lugar, não só como lista de objetos.' },
+      ],
+      result: { big: 'Azul', text: 'uma identidade que une campanha, acervo e cenário numa só linguagem.' },
+    },
+  },
+  {
+    name: 'Velle',
+    slug: 'velle',
+    short: { headline: ['Pequena,','branca, Velle.'] },   // phones: a shorter headline
+    tag: 'Branding e direção criativa',
+    colors: ['#a9c8e0', '#f3f6f8'],
+    headline: ['Uma marca', 'que cabe na mão.'],
+    sub: 'Identidade e embalagem de lançamento.',
+    cta: 'Ver case',
+    stat: { value: 'Velle', label: 'identidade e embalagem para o lançamento' },
+    text: 'Uma marca nova, uma embalagem simples e uma foto de lançamento que repete o nome até virar padrão. Identidade e direção criativa do começo ao ensaio.',
+    detail: {
+      lead: 'Uma marca nova pedia uma identidade direta e uma embalagem que se explicasse sozinha. Desenhamos o nome, a embalagem e a direção criativa do ensaio de lançamento.',
+      services: ['Branding', 'Embalagem', 'Direção criativa', 'Ensaio de lançamento'],
+      sections: [
+        { kicker: 'O nome', title: 'Uma palavra em letras grossas, sem enfeite', text: 'O logotipo preto sobre a embalagem branca é tudo o que a marca precisa para ser lida de longe.' },
+        { kicker: 'A embalagem', title: 'Uma bolsa simples, pensada para a mão', text: 'Formato prático, furo para pendurar e informação mínima. A embalagem faz o trabalho de vitrine.' },
+        { kicker: 'O lançamento', title: 'Repetição que vira padrão', text: 'No ensaio, a embalagem se multiplica sobre um fundo azul-claro. A repetição transforma o produto em desenho e o nome em padrão.' },
+      ],
+      result: { big: 'Velle', text: 'uma marca que se reconhece pela embalagem e pelo nome, do lançamento ao ensaio.' },
+    },
+  },
 ];
 
 // Photos taken from the Verso deck, to see how the real thing will look (an experiment: they can
 // repeat and be swapped freely). `hero` feeds the carousel card, the case card and the first screen
 // of the case page; `focus` is where, vertically, a wide crop of a tall photo should centre.
-const PHOTO_FOCUS = { 'all-pendre': 0.5, cantao: 0.12, sens8: 0.5, cinco: 0.5 };
+const PHOTO_FOCUS = { 'all-pendre': 0.5, cantao: 0.12, sens8: 0.5, cinco: 0.5, 'oficina-ceramica': 0.4, 'estudio-ilha': 0.5, velle: 0.5 };
 PROJECTS.forEach((p) => {
   p.images = { hero: `assets/cases/${p.slug}-hero.jpg`, focus: PHOTO_FOCUS[p.slug] };
   p.detail.sections.forEach((s, k) => { s.image = `assets/cases/${p.slug}-s${k + 1}.jpg`; });
