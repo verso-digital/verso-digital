@@ -160,16 +160,82 @@ window.PROJECTS = [
       result: { big: 'Velle', text: 'uma marca que se reconhece pela embalagem e pelo nome, do lançamento ao ensaio.' },
     },
   },
+  {
+    name: 'Astre',
+    slug: 'astre',
+    short: { headline: ['Identidade','de moda.'] },   // phones: a shorter headline
+    tag: 'Branding e identidade visual',
+    colors: ['#1a1613', '#b89a7a'],
+    headline: ['Uma marca de moda', 'com olhar editorial.'],
+    sub: 'Identidade, embalagem e linguagem de imagem.',
+    cta: 'Ver case',
+    stat: { value: 'Astre', label: 'identidade visual, embalagem e linguagem de imagem' },
+    text: 'Um nome discreto, fotos de moda em luz natural e um sistema que vai do logo à embalagem. A marca aparece pequena e deixa a imagem falar.',
+    detail: {
+      lead: 'Uma marca de moda precisava de uma identidade que acompanhasse o olhar das suas imagens. Criamos o nome visual, a embalagem e o sistema de posts, sempre com a marca em segundo plano.',
+      services: ['Branding', 'Identidade visual', 'Embalagem', 'Direção de arte'],
+      sections: [
+        { kicker: 'A marca', title: 'Um nome pequeno, sobre fotos grandes', text: 'O logotipo em minúsculas aparece discreto no canto da imagem. Quem olha vê primeiro a roupa, o gesto e a luz; o nome vem depois.' },
+        { kicker: 'A linguagem', title: 'Moda, objetos e detalhe', text: 'Retratos em preto e branco, peças em ambientes reais e objetos como uma taça ou um telefone antigo. Cada foto parece um quadro de editorial.' },
+        { kicker: 'O sistema', title: 'Do logo ao post, no mesmo tom', text: 'Logo, embalagem, papelaria, site e posts partem das mesmas escolhas de cor, enquadramento e silêncio.' },
+      ],
+      result: { big: 'Astre', text: 'uma identidade que deixa a imagem falar e leva a marca da embalagem ao feed.' },
+    },
+  },
+  {
+    name: 'So.Connected',
+    slug: 'so-connected',
+    short: { headline: ['Cultura','em rede.'] },   // phones: a shorter headline
+    tag: 'Social media e estratégia',
+    colors: ['#ff8fc8', '#1c1cf0'],
+    headline: ['Cultura que vira', 'conversa de marca.'],
+    sub: 'Música, moda e parcerias em carrossel.',
+    cta: 'Ver case',
+    stat: { value: 'Cultura', label: 'conteúdo que conecta música, moda e marcas' },
+    text: 'Carrosséis de feed para uma agência que une música, moda e marcas. De uma parceria entre 30PRAUM e Kenner à chegada da BRESH ao Brasil.',
+    detail: {
+      lead: 'A So.Connected trabalha na interseção entre música, moda e marcas. Criamos posts de carrossel que explicam parcerias, contam histórias e apresentam números, sempre em tom de conversa.',
+      services: ['Social media', 'Estratégia de conteúdo', 'Design de carrossel', 'Copy'],
+      sections: [
+        { kicker: 'Parceria', title: '30PRAUM e Kenner, em formato de história', text: 'Uma parceria de marca explicada em poucos cards: quem é cada lado, o que construíram juntos e o que acontece no Plantão Festival.' },
+        { kicker: 'Moda e música', title: 'Quando o artista veste o argumento', text: 'Posts editoriais que mostram como roupa e som contam a mesma história, com fotos recortadas, notas e uma pergunta para abrir a conversa.' },
+        { kicker: 'BRESH', title: 'Uma festa global chega ao Brasil', text: 'Cores fortes, mascote e números grandes para apresentar a BRESH ao público brasileiro: de onde veio, quanto cresceu e por que importa agora.' },
+      ],
+      result: { big: 'Cultura', text: 'posts que transformam parcerias e movimentos culturais em conversa de marca.' },
+    },
+  },
+  {
+    name: 'Botânico',
+    slug: 'botanico',
+    short: { headline: ['Sabor','em foco.'] },   // phones: a shorter headline
+    tag: 'Fotografia e conteúdo',
+    colors: ['#4a2a14', '#d7a35b'],
+    headline: ['Comida que', 'dá vontade.'],
+    sub: 'Ensaio de cardápio para o Botânico Bar.',
+    cta: 'Ver case',
+    stat: { value: 'Sabor', label: 'ensaio de fotos do cardápio' },
+    text: 'Um ensaio de cardápio com luz quente, mesa de madeira e pratos para dividir. As fotos servem ao feed, ao delivery e ao salão.',
+    detail: {
+      lead: 'Um bar com cozinha própria pedia fotos que fizessem o prato parecer o que é: para dividir, quente e sem pressa. O ensaio cobre tábuas, petiscos e acompanhamentos.',
+      services: ['Fotografia', 'Conteúdo', 'Tratamento de imagem'],
+      sections: [
+        { kicker: 'A mesa', title: 'Tábua cheia, madeira e luz quente', text: 'Frios, pães e frutas montados como na mesa: sem excesso de estilização, com cor e textura em primeiro plano.' },
+        { kicker: 'O detalhe', title: 'Petiscos que pedem a mão', text: 'Cestinhos, molhos e pratos em close mostram o ponto da fritura e o brilho do molho.' },
+        { kicker: 'O cardápio', title: 'Imagens que vendem sem dizer nada', text: 'Cada foto serve ao feed, ao cardápio digital e ao salão, com o mesmo fundo escuro e o mesmo calor.' },
+      ],
+      result: { big: 'Sabor', text: 'um banco de imagens do cardápio com a mesma luz, para o feed, o delivery e o salão.' },
+    },
+  },
 ];
 
 // Photos taken from the Verso deck, to see how the real thing will look (an experiment: they can
 // repeat and be swapped freely). `hero` feeds the carousel card, the case card and the first screen
 // of the case page; `focus` is where, vertically, a wide crop of a tall photo should centre.
-const PHOTO_FOCUS = { 'all-pendre': 0.5, cantao: 0.12, sens8: 0.5, cinco: 0.5, 'oficina-ceramica': 0.4, 'estudio-ilha': 0.5, velle: 0.5 };
+const PHOTO_FOCUS = { 'all-pendre': 0.5, cantao: 0.12, sens8: 0.5, cinco: 0.5, 'oficina-ceramica': 0.4, 'estudio-ilha': 0.5, velle: 0.5, astre: 0.35, 'so-connected': 0.3, botanico: 0.5 };
 // bump this whenever a picture is replaced, so phones and the CDN fetch the new file instead of the cached one
-const ASSET_V = 9;
-const PHOTO_CARD = { cantao: true, sens8: true, 'oficina-ceramica': true };
-const PHOTO_RATIO = { sens8: 1 };   // width / height of a case's section pictures, when they are not the usual 4:5
+const ASSET_V = 13;
+const PHOTO_CARD = { cantao: true, sens8: true, 'oficina-ceramica': true, 'so-connected': true, astre: true };
+const PHOTO_RATIO = { sens8: 1, botanico: 0.667 };   // width / height of a case's section pictures, when they are not the usual 4:5
 PROJECTS.forEach((p) => {
   if (PHOTO_RATIO[p.slug]) p.imageRatio = PHOTO_RATIO[p.slug];
   const own = PHOTO_CARD[p.slug];   // pictures cut for the carousel card: one for phones, one for wide screens
