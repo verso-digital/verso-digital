@@ -104,13 +104,14 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
   // drawn for the layout in use and drawn again if the window crosses the breakpoint.
   const PHONE = 760;
   let mobile = (container.clientWidth || innerWidth) < PHONE;
-  const photos = projects.map((p) => {
-    if (!p.images || !p.images.hero) return null;
-    const im = new Image();
-    im.src = p.images.hero;
-    return im;
-  });
-  const photosIn = Promise.all(photos.map((im) => (im && !im.complete ? new Promise((r) => { im.onload = im.onerror = r; }) : null)));
+  // A case can give a picture made for each layout (heroPortrait for phones, heroLandscape for wide screens),
+  // cropped so that no lettering that is part of the artwork sits where the card's own headline is drawn.
+  const loadPhoto = (src) => { if (!src) return null; const im = new Image(); im.src = src; return im; };
+  const photos = projects.map((p) => (p.images && p.images.hero
+    ? { def: loadPhoto(p.images.hero), portrait: loadPhoto(p.images.heroPortrait), landscape: loadPhoto(p.images.heroLandscape) }
+    : null));
+  const photoList = photos.flatMap((set) => (set ? [set.def, set.portrait, set.landscape] : [])).filter(Boolean);
+  const photosIn = Promise.all(photoList.map((im) => (!im.complete ? new Promise((r) => { im.onload = im.onerror = r; }) : null)));
   let fontsIn = false;
   const textures = projects.map((p, i) => new THREE.CanvasTexture(drawPlaceholder(p, i, true, mobile)));
   const bareTextures = projects.map((p, i) => new THREE.CanvasTexture(drawPlaceholder(p, i, false, mobile)));
@@ -560,9 +561,12 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
     c.width = w; c.height = h;
     const g = c.getContext('2d');
 
-    const photo = photos[index] && photos[index].complete && photos[index].naturalWidth ? photos[index] : null;
+    const set = photos[index];
+    const usable = (im) => im && im.complete && im.naturalWidth;
+    const own = set && (portrait ? set.portrait : set.landscape);
+    const photo = usable(own) ? own : (set && usable(set.def) ? set.def : null);
     if (photo) {
-      drawCover(g, photo, w, h, (p.images && p.images.focus) ?? 0.5);
+      drawCover(g, photo, w, h, photo === own ? 0.5 : (p.images && p.images.focus) ?? 0.5);
     } else {
       const grad = g.createLinearGradient(0, 0, w, h);
       grad.addColorStop(0, p.colors[0]);
