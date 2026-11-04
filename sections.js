@@ -7,7 +7,7 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
 const BRANDS = [
   'Riachuelo', 'All Pendre', 'LoveWorkz', 'A Oficina Cerâmica', 'Cinco', 'Kalimo', 'The Vault',
-  'Laneige', 'Beit Engenharia', 'Cantão', 'Velle', 'Heavy House', 'Rare Beauty', 'Botânico Bar',
+  'Laneige', 'Beit Engenharia', 'Cantão', 'Velle', 'Altare', 'Heavy House', 'Rare Beauty', 'Botânico Bar',
   'Brisa', 'Épice', 'Valentina Gorentzvaig', 'So.Connected',
 ];
 

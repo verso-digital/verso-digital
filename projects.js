@@ -226,15 +226,37 @@ window.PROJECTS = [
       result: { big: 'Sabor', text: 'um banco de imagens do cardápio com a mesma luz, para o feed, o delivery e o salão.' },
     },
   },
+  {
+    name: 'Altare',
+    slug: 'altare',
+    short: { headline: ['Couro, metal','e pele.'] },   // phones: a shorter headline
+    tag: 'Branding e identidade visual',
+    colors: ['#4a0f12', '#b9b9b6'],
+    headline: ['Uma marca em', 'couro, metal e pele.'],
+    sub: 'Logotipo, texturas e destaques do Instagram.',
+    cta: 'Ver case',
+    stat: { value: 'Altare', label: 'logotipo em couro, metal, relevo e pele' },
+    text: 'Um logotipo de traço solto, com um ponto final, aplicado em couro vinho, metal escovado e papel em relevo. A marca vive no feed e também na pele.',
+    detail: {
+      lead: 'A Altare pedia uma identidade com presença física. Desenhamos um logotipo manuscrito, com um floreio que corta as letras, e o levamos para materiais que dá vontade de tocar.',
+      services: ['Branding', 'Identidade visual', 'Brandbook', 'Direção de arte'],
+      sections: [
+        { kicker: 'O logotipo', title: 'Um traço solto, fechado por um ponto', text: 'As letras se cruzam num desenho único, com um floreio que sobe e um ponto final. Existe também uma versão em letra minúscula, presa a um alfinete.' },
+        { kicker: 'As texturas', title: 'Couro, metal e relevo no mesmo sistema', text: 'O mesmo logotipo em couro vinho, metal escovado, couro preto e relevo em papel areia. Cada textura vira um fundo para posts e destaques.' },
+        { kicker: 'Do feed à pele', title: 'Destaques que viram um conjunto', text: 'Os destaques do Instagram formam uma série de círculos com as texturas e uma versão do logotipo tatuada nas costas, para a marca aparecer no corpo e na tela.' },
+      ],
+      result: { big: 'Altare', text: 'uma identidade que sai do papel e vai para o couro, o metal e a pele.' },
+    },
+  },
 ];
 
 // Photos taken from the Verso deck, to see how the real thing will look (an experiment: they can
 // repeat and be swapped freely). `hero` feeds the carousel card, the case card and the first screen
 // of the case page; `focus` is where, vertically, a wide crop of a tall photo should centre.
-const PHOTO_FOCUS = { 'all-pendre': 0.5, cantao: 0.12, sens8: 0.5, cinco: 0.5, 'oficina-ceramica': 0.4, 'estudio-ilha': 0.5, velle: 0.5, astre: 0.35, 'so-connected': 0.3, botanico: 0.5 };
+const PHOTO_FOCUS = { 'all-pendre': 0.5, cantao: 0.12, sens8: 0.5, cinco: 0.5, 'oficina-ceramica': 0.4, 'estudio-ilha': 0.5, velle: 0.5, astre: 0.35, 'so-connected': 0.3, botanico: 0.5, altare: 0.5 };
 // bump this whenever a picture is replaced, so phones and the CDN fetch the new file instead of the cached one
-const ASSET_V = 13;
-const PHOTO_CARD = { cantao: true, sens8: true, 'oficina-ceramica': true, 'so-connected': true, astre: true };
+const ASSET_V = 15;
+const PHOTO_CARD = { cantao: true, sens8: true, 'oficina-ceramica': true, 'so-connected': true, astre: true, altare: true };
 const PHOTO_RATIO = { sens8: 1, botanico: 0.667 };   // width / height of a case's section pictures, when they are not the usual 4:5
 PROJECTS.forEach((p) => {
   if (PHOTO_RATIO[p.slug]) p.imageRatio = PHOTO_RATIO[p.slug];
