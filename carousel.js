@@ -84,11 +84,11 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
     vec3 tex(vec2 p) { return mix(texture2D(uMap, p).rgb, texture2D(uMapBare, p).rgb, uBare); }
     void main() {
       vec2 uv = (vUv - 0.5) * uCoverScale + 0.5;
-      float s = clamp(uVelocity * 0.0016, -0.012, 0.012);
+      float s = clamp(uVelocity * 0.0008, -0.006, 0.006);
       vec3 col = tex(uv);
       // while it moves: a soft horizontal smear and a pale veil (no colour fringes)
       if (abs(s) > 1e-4) col = (col + tex(uv + vec2(s, 0.0)) + tex(uv - vec2(s, 0.0))) / 3.0;
-      col = mix(col, vec3(1.0), clamp(abs(uVelocity) * 0.0035, 0.0, 0.2));
+      col = mix(col, vec3(1.0), clamp(abs(uVelocity) * 0.0017, 0.0, 0.1));
       col *= uDim;
       float d = roundedBox(vUv);
       float mask = 1.0 - smoothstep(-1.0, 1.0, d);
