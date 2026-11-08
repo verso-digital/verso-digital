@@ -21,7 +21,7 @@ window.Menu = (function () {
   let tl = null;
 
   // resting states, set once so every open/close just tweens between them
-  gsap.set(links, { y: 14, opacity: 0, filter: 'blur(6px)' });
+  gsap.set(links, { y: 14, opacity: 0, filter: 'blur(2px)' });
   gsap.set(lineA, { y: -GAP, rotate: 0 });
   gsap.set(lineB, { y: GAP, rotate: 0 });
 
@@ -36,7 +36,7 @@ window.Menu = (function () {
     tl = gsap.timeline();
     tl.set([veil, menu], { visibility: 'visible' })
       // the page goes soft and bright
-      .to(veil, { opacity: 1, '--veil-blur': '24px', duration: 0.38, ease: 'power2.out' }, 0)
+      .to(veil, { opacity: 1, '--veil-blur': '10px', duration: 0.38, ease: 'power2.out' }, 0)
       // the button pulls in to a ball while its two lines cross into an X
       .to(btn, { width: ROUND, duration: 0.42, ease: 'expo.out' }, 0)
       .to(lineA, { y: 0, rotate: 45, duration: 0.4, ease: 'power3.out' }, 0)
@@ -58,7 +58,7 @@ window.Menu = (function () {
         root.classList.remove('menu-open');
       },
     });
-    tl.to(links, { y: 10, opacity: 0, filter: 'blur(4px)', duration: 0.18, ease: 'power2.in', stagger: { each: 0.02, from: 'start' } }, 0)
+    tl.to(links, { y: 10, opacity: 0, filter: 'blur(2px)', duration: 0.18, ease: 'power2.in', stagger: { each: 0.02, from: 'start' } }, 0)
       .to(btn, { width: WIDE, duration: 0.4, ease: 'expo.out' }, 0.04)
       .to(lineA, { y: -GAP, rotate: 0, duration: 0.34, ease: 'power3.out' }, 0.04)
       .to(lineB, { y: GAP, rotate: 0, duration: 0.34, ease: 'power3.out' }, 0.04)

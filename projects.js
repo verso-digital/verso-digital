@@ -7,7 +7,7 @@
 // real story once it's written.
 window.PROJECTS = [
   {
-    name: 'All Pendre',
+    name: 'Allpendre',
     slug: 'all-pendre',
     short: { headline: ['751% mais','seguidores.'] },   // phones: a shorter headline
     tag: 'Estratégia e social media',
@@ -21,7 +21,7 @@ window.PROJECTS = [
       lead: 'Uma marca de casa e mesa com muito para mostrar e pouca presença digital. Assumimos o perfil inteiro para transformar vitrine em lugar de descoberta.',
       services: ['Estratégia', 'Direção criativa', 'Conteúdo', 'Design', 'Gestão de comunidade'],
       sections: [
-        { kicker: 'O ponto de partida', title: 'Uma marca bonita que ainda precisava ser encontrada', text: 'A All Pendre tinha repertório, objetos e olhar. Faltava um perfil que organizasse tudo isso numa conversa contínua, em vez de posts soltos.' },
+        { kicker: 'O ponto de partida', title: 'Uma marca bonita que ainda precisava ser encontrada', text: 'A Allpendre tinha repertório, objetos e olhar. Faltava um perfil que organizasse tudo isso numa conversa contínua, em vez de posts soltos.' },
         { kicker: 'O que assumimos', title: '100% da social media do perfil', text: 'Estratégia, direção criativa, produção de conteúdo, design e gestão de comunidade na mesma mão. Um só time decidindo o que dizer, como mostrar e como responder.' },
         { kicker: 'A linguagem', title: 'Um grid que se reconhece de longe', text: 'Objetos, cores e cenas de mesa montados com recortes e palavras sobre as fotos. O perfil passou a ter um jeito próprio de aparecer, mesmo antes de o nome estar à vista.' },
       ],
@@ -65,9 +65,14 @@ window.PROJECTS = [
       lead: 'Uma identidade construída para um selo de certificação no mercado de wellness, em torno do que a marca precisa vender primeiro: confiança.',
       services: ['Branding', 'Identidade visual', 'Narrativa', 'Direção criativa'],
       sections: [
-        { kicker: 'O ponto de partida', title: 'Um selo que precisa ser levado a sério', text: 'Quem certifica precisa parecer certo antes de dizer qualquer coisa. O ponto de partida foi decidir como transmitir autoridade sem frieza.' },
-        { kicker: 'A narrativa', title: 'Confiança como primeira promessa', text: 'Trabalhamos narrativa e visual em torno de uma só ideia. Tom de voz, símbolo e discurso se apoiam para dar a sensação de algo sólido e acolhedor.' },
-        { kicker: 'Do selo à paleta', title: 'Terra, oliva e laranja', text: 'Um símbolo que funciona como selo e uma paleta quente e firme. Tudo pensado para transmitir autoridade, do carimbo ao perfil nas redes.' },
+        { kicker: "O logotipo", title: "Letras finas e altas, com um S em gota", text: "O nome em caixa alta e fina termina num S em forma de gota. Há versões em preto, laranja e sobre fundos coloridos." },
+        { kicker: "O selo", title: "Um círculo com o S no centro", text: "O selo de certificação leva o S no meio e o nome em volta, em versões claras e escuras." },
+        { kicker: "A paleta", title: "Verde-musgo, oliva, terracota e creme", text: "A paleta principal junta verde escuro, oliva, laranja, terracota e um branco quente. A secundária traz marrom e areia." },
+        { kicker: "O padrão", title: "O S que se repete", text: "O ícone vira padrão repetido em creme, verde e laranja, para fundos, embalagens e materiais." },
+        { kicker: "Os objetos", title: "Copos, garrafa e moletom com o ícone", text: "O S em laranja e verde aparece em copos de papel, garrafa e roupa, nos tons da paleta." },
+        { kicker: "O dia a dia", title: "Uma ecobag no tom da marca", text: "A sacola de pano leva o logotipo em tom sobre tom e acompanha a marca para fora dos eventos." },
+        { kicker: "O digital", title: "Perfil de Instagram com destaques em círculo", text: "O perfil usa o ícone em círculos coloridos nos destaques e fotos de bem-estar nos posts." },
+        { kicker: "O site", title: "Foto de rosto e um título curto", text: "A página inicial do site combina uma foto em tom quente com uma frase direta e um botão claro." },
       ],
       result: { big: 'Selo', text: 'uma marca que se apresenta com autoridade e calma, do símbolo à paleta.' },
     },
@@ -153,9 +158,11 @@ window.PROJECTS = [
       lead: 'Uma marca nova pedia uma identidade direta e uma embalagem que se explicasse sozinha. Desenhamos o nome, a embalagem e a direção criativa do ensaio de lançamento.',
       services: ['Branding', 'Embalagem', 'Direção criativa', 'Ensaio de lançamento'],
       sections: [
-        { kicker: 'O nome', title: 'Uma palavra em letras grossas, sem enfeite', text: 'O logotipo preto sobre a embalagem branca é tudo o que a marca precisa para ser lida de longe.' },
-        { kicker: 'A embalagem', title: 'Uma bolsa simples, pensada para a mão', text: 'Formato prático, furo para pendurar e informação mínima. A embalagem faz o trabalho de vitrine.' },
-        { kicker: 'O lançamento', title: 'Repetição que vira padrão', text: 'No ensaio, a embalagem se multiplica sobre um fundo azul-claro. A repetição transforma o produto em desenho e o nome em padrão.' },
+        { kicker: "O nome", title: "Uma palavra em letras grossas, sem enfeite", text: "O logotipo preto sobre a embalagem branca é tudo o que a marca precisa para ser lida de longe." },
+        { kicker: "A embalagem em cena", title: "A bolsa com a etiqueta Velle nos ombros e nas mãos", text: "No dia do lançamento, a embalagem aparece junto das pessoas: pendurada, segurada, passada de mão em mão." },
+        { kicker: "A bancada", title: "Bolsas brancas entre pincéis e paletas", text: "Sobre a mesa de maquiagem, a embalagem e os produtos dividem a cena. A marca aparece no lugar onde vai ser usada." },
+        { kicker: "O espelho", title: "Um gesto simples, o produto à mão", text: "Retratos no espelho do banheiro mostram a rotina da marca, sem pose: maquiagem, luz natural e o que está ao redor." },
+        { kicker: "Os bastidores", title: "O dia do lançamento, por dentro", text: "A equipe ao redor da modelo mostra o ritmo do dia: gente trabalhando, riso e a marca sempre por perto." },
       ],
       result: { big: 'Velle', text: 'uma marca que se reconhece pela embalagem e pelo nome, do lançamento ao ensaio.' },
     },
@@ -175,9 +182,12 @@ window.PROJECTS = [
       lead: 'Uma marca de moda precisava de uma identidade que acompanhasse o olhar das suas imagens. Criamos o nome visual, a embalagem e o sistema de posts, sempre com a marca em segundo plano.',
       services: ['Branding', 'Identidade visual', 'Embalagem', 'Direção de arte'],
       sections: [
-        { kicker: 'A marca', title: 'Um nome pequeno, sobre fotos grandes', text: 'O logotipo em minúsculas aparece discreto no canto da imagem. Quem olha vê primeiro a roupa, o gesto e a luz; o nome vem depois.' },
-        { kicker: 'A linguagem', title: 'Moda, objetos e detalhe', text: 'Retratos em preto e branco, peças em ambientes reais e objetos como uma taça ou um telefone antigo. Cada foto parece um quadro de editorial.' },
-        { kicker: 'O sistema', title: 'Do logo ao post, no mesmo tom', text: 'Logo, embalagem, papelaria, site e posts partem das mesmas escolhas de cor, enquadramento e silêncio.' },
+        { kicker: "A marca", title: "Um nome pequeno, sobre fotos grandes", text: "O logotipo em minúsculas aparece discreto no canto da imagem. Quem olha vê primeiro a roupa, o gesto e a luz; o nome vem depois." },
+        { kicker: "A linguagem", title: "Moda, objetos e detalhe", text: "Retratos em preto e branco, peças em ambientes reais e objetos como uma taça ou um telefone antigo. Cada foto parece um quadro de editorial." },
+        { kicker: "O sistema", title: "Do logo ao post, no mesmo tom", text: "Logo, embalagem, papelaria, site e posts partem das mesmas escolhas de cor, enquadramento e silêncio." },
+        { kicker: "A embalagem", title: "Uma sacola geométrica em amarelo-manteiga", text: "Alça vazada, vincos marcados e o nome em preto. Uma forma própria e uma cor só, que se reconhece de longe." },
+        { kicker: "O objeto", title: "Sem modelo nem cenário, a sacola vira escultura", text: "Em fundo liso, as pontas e os vincos ficam à mostra, com o nome centralizado na frente." },
+        { kicker: "O pano", title: "O mesmo amarelo em tecido", text: "A versão em pano leva o mesmo nome e a mesma cor para o uso do dia a dia, de ombro e de mão." },
       ],
       result: { big: 'Astre', text: 'uma identidade que deixa a imagem falar e leva a marca da embalagem ao feed.' },
     },
@@ -192,7 +202,7 @@ window.PROJECTS = [
     sub: 'Música, moda e parcerias em carrossel.',
     cta: 'Ver case',
     stat: { value: 'Cultura', label: 'conteúdo que conecta música, moda e marcas' },
-    text: 'Carrosséis de feed para uma agência que une música, moda e marcas. De uma parceria entre 30PRAUM e Kenner à chegada da BRESH ao Brasil.',
+    text: "Posts de carrossel do perfil da própria So.Connected, em inglês, sobre parcerias e movimentos culturais. Os artistas e as marcas que aparecem são assunto do perfil.",
     detail: {
       lead: 'A So.Connected trabalha na interseção entre música, moda e marcas. Criamos posts de carrossel que explicam parcerias, contam histórias e apresentam números, sempre em tom de conversa.',
       services: ['Social media', 'Estratégia de conteúdo', 'Design de carrossel', 'Copy'],
@@ -219,9 +229,11 @@ window.PROJECTS = [
       lead: 'Um bar com cozinha própria pedia fotos que fizessem o prato parecer o que é: para dividir, quente e sem pressa. O ensaio cobre tábuas, petiscos e acompanhamentos.',
       services: ['Fotografia', 'Conteúdo', 'Tratamento de imagem'],
       sections: [
-        { kicker: 'A mesa', title: 'Tábua cheia, madeira e luz quente', text: 'Frios, pães e frutas montados como na mesa: sem excesso de estilização, com cor e textura em primeiro plano.' },
-        { kicker: 'O detalhe', title: 'Petiscos que pedem a mão', text: 'Cestinhos, molhos e pratos em close mostram o ponto da fritura e o brilho do molho.' },
-        { kicker: 'O cardápio', title: 'Imagens que vendem sem dizer nada', text: 'Cada foto serve ao feed, ao cardápio digital e ao salão, com o mesmo fundo escuro e o mesmo calor.' },
+        { kicker: "A mesa", title: "Tábua cheia, madeira e luz quente", text: "Frios, pães e frutas montados como na mesa: sem excesso de estilização, com cor e textura em primeiro plano." },
+        { kicker: "O detalhe", title: "Petiscos que pedem a mão", text: "Cestinhos, molhos e pratos em close mostram o ponto da fritura e o brilho do molho." },
+        { kicker: "Os petiscos", title: "Bolinhos dourados, ervas por cima", text: "Em prato claro e luz lateral, o ponto da fritura ganha o primeiro plano e o prato inteiro cabe na foto." },
+        { kicker: "A bebida", title: "Vermelho, limão e gelo", text: "Os drinks aparecem na madeira da mesa ou contra um fundo claro, para fechar a cena com cor." },
+        { kicker: "O ambiente", title: "O pátio onde tudo acontece", text: "Plantas, parede clara e mesa de madeira mostram o lugar, além do prato." },
       ],
       result: { big: 'Sabor', text: 'um banco de imagens do cardápio com a mesma luz, para o feed, o delivery e o salão.' },
     },
@@ -236,14 +248,19 @@ window.PROJECTS = [
     sub: 'Logotipo, texturas e destaques do Instagram.',
     cta: 'Ver case',
     stat: { value: 'Altare', label: 'logotipo em couro, metal, relevo e pele' },
-    text: 'Um logotipo de traço solto, com um ponto final, aplicado em couro vinho, metal escovado e papel em relevo. A marca vive no feed e também na pele.',
+    text: "Um acervo de moda com logotipo de traço solto e um ponto final, aplicado em couro vinho, metal escovado, papel em relevo, etiquetas, sacola e feed.",
     detail: {
       lead: 'A Altare pedia uma identidade com presença física. Desenhamos um logotipo manuscrito, com um floreio que corta as letras, e o levamos para materiais que dá vontade de tocar.',
       services: ['Branding', 'Identidade visual', 'Brandbook', 'Direção de arte'],
       sections: [
-        { kicker: 'O logotipo', title: 'Um traço solto, fechado por um ponto', text: 'As letras se cruzam num desenho único, com um floreio que sobe e um ponto final. Existe também uma versão em letra minúscula, presa a um alfinete.' },
-        { kicker: 'As texturas', title: 'Couro, metal e relevo no mesmo sistema', text: 'O mesmo logotipo em couro vinho, metal escovado, couro preto e relevo em papel areia. Cada textura vira um fundo para posts e destaques.' },
-        { kicker: 'Do feed à pele', title: 'Destaques que viram um conjunto', text: 'Os destaques do Instagram formam uma série de círculos com as texturas e uma versão do logotipo tatuada nas costas, para a marca aparecer no corpo e na tela.' },
+        { kicker: "O logotipo", title: "Um traço solto, fechado por um ponto", text: "As letras se cruzam num desenho único, com um floreio que sobe e um ponto final. Existe também uma versão em letra minúscula, presa a um alfinete." },
+        { kicker: "Na pele", title: "A marca também é tatuagem", text: "O logotipo aparece tatuado na nuca e nas costas, como uma assinatura que não sai." },
+        { kicker: "As texturas", title: "Couro, metal e relevo no mesmo sistema", text: "O mesmo logotipo em couro vinho, metal escovado, couro preto e relevo em papel areia. Cada textura vira um fundo para posts e destaques." },
+        { kicker: "A sacola", title: "Prata escovada, alças pretas, logotipo grande", text: "A sacola leva o logotipo em preto sobre o prateado, de modo que a marca vai pela rua junto com quem compra." },
+        { kicker: "A etiqueta", title: "Claro, costurado na peça", text: "Uma etiqueta de tom claro, com o logotipo e a data de fundação, fixada na peça." },
+        { kicker: "Os tags", title: "Papel claro, preso por um nó", text: "Dois tags com o logotipo e a frase \"The art of collecting.\" em tipografia serifada." },
+        { kicker: "O envelope", title: "Vinho por fora, cartão claro por dentro", text: "O envelope vinho leva o logotipo em branco no verso e guarda um cartão de apresentação, para convites e comunicados." },
+        { kicker: "O feed", title: "Vitrine em preto, vinho e prata", text: "No Instagram, os destaques em círculo e os posts em preto, vinho e prata formam a vitrine da marca." },
       ],
       result: { big: 'Altare', text: 'uma identidade que sai do papel e vai para o couro, o metal e a pele.' },
     },
@@ -255,12 +272,18 @@ window.PROJECTS = [
 // of the case page; `focus` is where, vertically, a wide crop of a tall photo should centre.
 const PHOTO_FOCUS = { 'all-pendre': 0.5, cantao: 0.12, sens8: 0.5, cinco: 0.5, 'oficina-ceramica': 0.4, 'estudio-ilha': 0.5, velle: 0.5, astre: 0.35, 'so-connected': 0.3, botanico: 0.5, altare: 0.5 };
 // bump this whenever a picture is replaced, so phones and the CDN fetch the new file instead of the cached one
-const ASSET_V = 15;
+const ASSET_V = 18;
 const PHOTO_CARD = { cantao: true, sens8: true, 'oficina-ceramica': true, 'so-connected': true, astre: true, altare: true };
-const PHOTO_RATIO = { sens8: 1, botanico: 0.667 };   // width / height of a case's section pictures, when they are not the usual 4:5
+const PHOTO_RATIO = { sens8: 1, botanico: 0.667 };
+const SECTION_RATIOS = {   // overrides, per section: width / height of the picture
+  velle: [0.78, 0.667, 1.5, 0.667, 0.667],
+  astre: [0.8, 0.8, 0.8, 1, 1, 0.667],
+  altare: [0.8, 1.778, 0.8, 1.778, 1.778, 1.778, 1.778, 1.778],
+  sens8: [1.778, 1.778, 1.778, 1.778, 1.778, 1.778, 1.778, 1.778],
+};
 PROJECTS.forEach((p) => {
   if (PHOTO_RATIO[p.slug]) p.imageRatio = PHOTO_RATIO[p.slug];
   const own = PHOTO_CARD[p.slug];   // pictures cut for the carousel card: one for phones, one for wide screens
   p.images = { card: `assets/cases/${p.slug}-card.jpg?v=${ASSET_V}`, heroPortrait: own && `assets/cases/${p.slug}-card-m.jpg?v=${ASSET_V}`, heroLandscape: own && `assets/cases/${p.slug}-card-d.jpg?v=${ASSET_V}`, hero: `assets/cases/${p.slug}-hero.jpg?v=${ASSET_V}`, focus: PHOTO_FOCUS[p.slug] };
-  p.detail.sections.forEach((s, k) => { s.image = `assets/cases/${p.slug}-s${k + 1}.jpg?v=${ASSET_V}`; });
+  p.detail.sections.forEach((s, k) => { s.image = `assets/cases/${p.slug}-s${k + 1}.jpg?v=${ASSET_V}`; const r = SECTION_RATIOS[p.slug]; if (r && r[k]) s.ratio = r[k]; });
 });

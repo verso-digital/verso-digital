@@ -39,7 +39,7 @@ window.CaseView = (function () {
     const sections = d.sections.map((s, k) => `
       <section class="cd-sec ${k % 2 ? 'cd-sec--flip' : ''}">
         <div class="cd-sec__img">
-          <div class="cd-img ${s.image ? 'is-photo' : ''}" data-bend style="${tone(k)}${s.image && p.imageRatio ? `;--ar:${p.imageRatio}` : ''}">
+          <div class="cd-img ${s.image ? 'is-photo' : ''}" data-bend style="${tone(k)}${s.image && (s.ratio || p.imageRatio) ? `;--ar:${s.ratio || p.imageRatio}` : ''}">
             <div class="cd-img__in ${s.image ? 'has-photo' : ''}" style="${s.image ? `background-image:url(${s.image})` : ''}"></div>
             ${s.image ? '' : `<span class="cd-img__ph">Imagem · ${p.name} · ${pad(k + 2)}</span>`}
           </div>

@@ -6,7 +6,7 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 // fonts are in, so layout is measured against the final text.
 
 const BRANDS = [
-  'Riachuelo', 'All Pendre', 'LoveWorkz', 'A Oficina Cerâmica', 'Cinco', 'Kalimo', 'The Vault',
+  'Riachuelo', 'Allpendre', 'LoveWorkz', 'A Oficina Cerâmica', 'Cinco', 'Kalimo', 'The Vault',
   'Laneige', 'Beit Engenharia', 'Cantão', 'Velle', 'Altare', 'Heavy House', 'Rare Beauty', 'Botânico Bar',
   'Brisa', 'Épice', 'Valentina Gorentzvaig', 'So.Connected',
 ];
