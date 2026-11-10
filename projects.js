@@ -272,7 +272,7 @@ window.PROJECTS = [
 // of the case page; `focus` is where, vertically, a wide crop of a tall photo should centre.
 const PHOTO_FOCUS = { 'all-pendre': 0.5, cantao: 0.12, sens8: 0.5, cinco: 0.5, 'oficina-ceramica': 0.4, 'estudio-ilha': 0.5, velle: 0.5, astre: 0.35, 'so-connected': 0.3, botanico: 0.5, altare: 0.5 };
 // bump this whenever a picture is replaced, so phones and the CDN fetch the new file instead of the cached one
-const ASSET_V = 20;
+const ASSET_V = 21;
 const PHOTO_CARD = { cantao: true, sens8: true, 'oficina-ceramica': true, 'so-connected': true, astre: true, altare: true };
 const PHOTO_RATIO = { sens8: 1, botanico: 0.667 };
 const SECTION_RATIOS = {   // overrides, per section: width / height of the picture
