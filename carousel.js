@@ -120,6 +120,7 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
   // repaint (once the web font is in, or when the layout flips) and upload to the GPU right away,
   // behind the loader, so the first visible frame doesn't stall
   function repaint() {
+    dropFull();
     textures.forEach((t, i) => {
       t.image = drawPlaceholder(projects[i], i, true, mobile);
       t.needsUpdate = true;
@@ -137,6 +138,42 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
     repaint();
   });
   photosIn.then(() => { if (fontsIn) repaint(); });   // a photo that arrived late still gets in
+
+  // ---------- full-screen picture in high resolution ----------
+  // The slide textures are sized for the carousel; stretched over a whole screen they go soft. When a case
+  // opens, its picture is fetched in high resolution (same framing) and drawn at the screen's real pixel
+  // size, then dropped again when the case closes, so only one big texture lives at a time.
+  const hiTex = {};
+  function loadFull(i) {
+    const p = projects[i];
+    const src = p.images && (mobile ? p.images.fullPortrait : p.images.fullLandscape);
+    if (!src || hiTex[i]) return;
+    hiTex[i] = 'loading';
+    const im = new Image();
+    im.src = src;
+    const portrait = mobile;
+    (im.decode ? im.decode() : new Promise((r, e) => { im.onload = r; im.onerror = e; })).then(() => {
+      if (cover.i !== i || mobile !== portrait) { delete hiTex[i]; return; }
+      const dpr = Math.min(devicePixelRatio || 1, 3);
+      const screenScale = portrait ? (innerHeight * dpr) / 1152 : Math.max((innerHeight * dpr) / 768, (innerWidth * dpr) / 1280);
+      const imgScale = portrait ? im.naturalHeight / 1152 : im.naturalWidth / 1280;
+      const maxScale = renderer.capabilities.maxTextureSize / (portrait ? 1152 : 1280);
+      const scale = Math.max(1, Math.min(screenScale, imgScale, maxScale, 3));
+      const tex = new THREE.CanvasTexture(drawPlaceholder(p, i, false, portrait, { img: im, scale }));
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      renderer.initTexture(tex);
+      hiTex[i] = tex;
+      meshes[i].material.uniforms.uMapBare.value = tex;
+      drawNow();
+    }).catch(() => { delete hiTex[i]; });
+  }
+  function dropFull() {
+    Object.keys(hiTex).forEach((k) => {
+      const t = hiTex[k];
+      if (t && t !== 'loading') { meshes[k].material.uniforms.uMapBare.value = bareTextures[k]; t.dispose(); }
+      delete hiTex[k];
+    });
+  }
 
   const meshes = projects.map((_, i) => {
     const material = new THREE.ShaderMaterial({
@@ -472,6 +509,7 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
     open(i, duration = 1.4) {
       hovered = null;
       cover.i = i;
+      loadFull(i);
       // the card's own text, pill and button fade away at once; the case page brings the headline back as HTML
       gsap.to(cover, { b: 1, duration: 0.14, ease: 'power1.out', overwrite: 'auto' });
       return new Promise((res) => gsap.to(cover, { p: 1, duration, ease: 'expo.inOut', overwrite: 'auto', onComplete: res }));
@@ -481,10 +519,15 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
       frozen = false;
       // the text comes back into the picture as the slide settles into its place
       gsap.to(cover, { b: 0, duration: 0.3, delay: Math.max(0, duration - 0.3), ease: 'power1.in', overwrite: 'auto' });
-      return new Promise((res) => gsap.to(cover, { p: 0, duration, ease: 'expo.inOut', overwrite: 'auto', onComplete: () => { cover.i = -1; res(); } }));
+      return new Promise((res) => gsap.to(cover, { p: 0, duration, ease: 'expo.inOut', overwrite: 'auto', onComplete: () => { cover.i = -1; dropFull(); res(); } }));
     },
     // jump straight to the opened state for slide `i` (used when a card, not the carousel, opens the case)
-    setCover(i, p = 1) { cover.i = i; cover.p = p; cover.b = p > 0 ? 1 : 0; frozen = false; drawNow(); },
+    setCover(i, p = 1) {
+      if (i !== cover.i) dropFull();
+      cover.i = i; cover.p = p; cover.b = p > 0 ? 1 : 0; frozen = false;
+      if (i >= 0 && p > 0) loadFull(i);
+      drawNow();
+    },
     isMobile: () => mobile,
     // the picture of slide i without text, exactly as it is drawn on the full-screen slide
     barePicture: (i) => bareTextures[i].image,
@@ -578,16 +621,19 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
     g.drawImage(img, (w - dw) / 2, (h - dh) * focusY, dw, dh);
   }
 
-  function drawPlaceholder(p, index, withText = true, portrait = false) {
-    const w = portrait ? 768 : 1280;
-    const h = portrait ? 1152 : 768;
+  // `hi` ({ img, scale }): draw the text-free picture bigger, from a high-resolution file with the same
+  // framing, for the full-screen slide behind an open case
+  function drawPlaceholder(p, index, withText = true, portrait = false, hi = null) {
+    const s = hi ? hi.scale : 1;
+    const w = Math.round((portrait ? 768 : 1280) * s);
+    const h = Math.round((portrait ? 1152 : 768) * s);
     const c = document.createElement('canvas');
     c.width = w; c.height = h;
     const g = c.getContext('2d');
 
     const set = photos[index];
     const usable = (im) => im && im.complete && im.naturalWidth;
-    const own = set && (portrait ? set.portrait : set.landscape);
+    const own = hi ? hi.img : set && (portrait ? set.portrait : set.landscape);
     const photo = usable(own) ? own : (set && usable(set.def) ? set.def : null);
     if (photo) {
       drawCover(g, photo, w, h, photo === own ? 0.5 : (p.images && p.images.focus) ?? 0.5);
@@ -614,7 +660,7 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
 
     // scrim for legibility: from the left on wide cards, from the bottom on tall ones. Its strength
     // follows how bright the photo is behind the headline, so pale photos get a darker veil.
-    const behind = portrait ? meanLum(g, 48, 700, 652, 360) : meanLum(g, 40, 100, 760, 420);
+    const behind = portrait ? meanLum(g, 48 * s, 700 * s, 652 * s, 360 * s) : meanLum(g, 40 * s, 100 * s, 760 * s, 420 * s);
     const a = portrait ? Math.min(0.9, Math.max(0.6, 0.6 + 0.9 * behind)) : Math.min(0.82, Math.max(0.45, 0.45 + 0.8 * behind));
     const scrim = portrait ? g.createLinearGradient(0, h, 0, h * 0.3) : g.createLinearGradient(0, 0, w * 0.75, 0);
     scrim.addColorStop(0, `rgba(0,0,0,${a})`);
