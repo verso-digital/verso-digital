@@ -36,7 +36,7 @@ window.I18N = { base: '../', services: 'Services', front: 'Focus', talk: 'Talk t
     sens8: {
       tag: 'Branding',
       short: ['Trust', 'comes first.'], headline: ['Trust before', 'any sale.'], sub: 'Branding for a wellness seal.',
-      stat: ['Seal', 'an identity designed to convey authority'],
+      stat: ['Sens8', 'an identity designed to convey authority'],
       text: 'In wellness, a seal has to sell trust first. From narrative to palette, every decision works to look solid and welcoming.',
       lead: 'An identity built for a certification seal in the wellness market, around what the brand needs to sell first: trust.',
       services: ['Branding', 'Visual identity', 'Narrative', 'Creative direction'],
@@ -50,12 +50,12 @@ window.I18N = { base: '../', services: 'Services', front: 'Focus', talk: 'Talk t
         S('Digital', 'An Instagram profile with circular highlights', 'The profile uses the icon in coloured circles for the highlights and wellness photos in the posts.'),
         S('The website', 'A face photo and a short headline', 'The website’s home page pairs a warm-toned photo with a direct sentence and a clear button.'),
       ],
-      result: ['Seal', 'a brand that presents itself with authority and calm, from the symbol to the palette.'],
+      result: ['Sens8', 'a brand that presents itself with authority and calm, from the symbol to the palette.'],
     },
     cinco: {
       tag: 'Execution and management',
       short: ['Fashion with', 'presence.'], headline: ['Fashion with', 'daily presence.'], sub: 'Content that keeps the identity intact.',
-      stat: ['Grid', 'motion, reels and design in a single rhythm'],
+      stat: ['Content', 'motion, reels and design in a single rhythm'],
       text: 'Continuous content production for a fashion brand, joining the brand’s archive with new layers of creation without diluting its visual signature.',
       lead: 'Content strategy and production for a fashion brand, always in service of its identity and the perception it builds.',
       services: ['Strategy', 'Graphic design', 'Motion', 'Reels', 'Captions', 'Grid organisation'],
@@ -64,7 +64,7 @@ window.I18N = { base: '../', services: 'Services', front: 'Focus', talk: 'Talk t
         S('What we produce', 'Design, motion, reels and captions', 'From graphic design to reels, from captions to grid organisation. Every piece is thought out in the sequence in which it will be seen.'),
         S('The method', 'The brand’s archive and AI, under the same ruler', 'We combine AI materials with the brand’s own archive to build awareness without losing identity. Curation is what keeps everything looking like one brand.'),
       ],
-      result: ['Grid', 'constant awareness, without diluting the brand’s identity.'],
+      result: ['Content', 'constant awareness, without diluting the brand’s identity.'],
     },
     'oficina-ceramica': {
       tag: 'Social media',
@@ -176,6 +176,20 @@ window.I18N = { base: '../', services: 'Services', front: 'Focus', talk: 'Talk t
       ],
       result: ['Altare', 'an identity that leaves the paper and goes onto leather, metal and skin.'],
     },
+    'mari-maria': {
+      tag: 'Campaign production',
+      short: ['Makeup that', 'tastes like cookie.'], headline: ['Makeup that', 'tastes like cookie.'], sub: 'Campaign for the Mari Maria Makeup × Scherbi’s collab.',
+      stat: ['Collab', 'executive production, direction and editing of the campaign'],
+      text: 'The collab between Mari Maria Makeup and Scherbi’s became a photo and video campaign. We handled executive production, direction and post-production.',
+      lead: 'A makeup brand and a cookie brand launching products together. The campaign had to put both at the same table, with the same appetite.',
+      services: ['Executive production', 'Direction', 'Post-production', 'Editing'],
+      sections: [
+        S('The campaign', 'Two brands at the same table', 'Lipstick and cookie share the scene: the product shows up in the hand, on the lips and in the middle of the dough.'),
+        S('The product', 'Packaging in the middle of the mess', 'The collab’s boxes, bags and lipsticks sit among chocolate, sprinkles and broken cookies.'),
+        S('The direction', 'Close-ups, warm colour and a table in use', 'Burgundy, chocolate and caramel in the palette, soft light and a table that looks real, from the set to the video edit.'),
+      ],
+      result: ['Collab', 'a photo and video campaign that puts both brands in the same language.'],
+    },
   };
 
   window.PROJECTS.forEach((p) => {
@@ -187,7 +201,7 @@ window.I18N = { base: '../', services: 'Services', front: 'Focus', talk: 'Talk t
     p.detail.lead = t.lead; p.detail.services = t.services;
     p.detail.sections = t.sections.map((s, i) => Object.assign({}, p.detail.sections[i] || {}, s));
     p.detail.result = { big: t.result[0], text: t.result[1] };
-    const GT = { cantao: ['How to sell jeans, in seven posts'], 'so-connected': ['The Latin music carousel', 'The countries that listen to Brazilian music the most'], 'estudio-ilha': ['Posts from the Heineken campaign'], 'oficina-ceramica': ['From clay to piece: process and result'] };
+    const GT = { 'all-pendre': ['The home shoot', 'Creative posts'], cinco: ['The videos'], 'mari-maria': ['More from the shoot', 'The campaign videos'], cantao: ['How to sell jeans, in seven posts'], 'so-connected': ['The Latin music carousel', 'The countries that listen to Brazilian music the most'], 'estudio-ilha': ['Posts from the Heineken campaign'], 'oficina-ceramica': ['From clay to piece: process and result'] };
     const up = (u) => (u ? '../' + u : u);
     p.images.card = up(p.images.card); p.images.hero = up(p.images.hero);
     p.images.heroPortrait = up(p.images.heroPortrait); p.images.heroLandscape = up(p.images.heroLandscape); p.images.fullPortrait = up(p.images.fullPortrait); p.images.fullLandscape = up(p.images.fullLandscape);

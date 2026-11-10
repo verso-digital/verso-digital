@@ -59,7 +59,7 @@ window.PROJECTS = [
     headline: ['Confiança antes', 'de qualquer venda.'],
     sub: 'Branding para um selo de wellness.',
     cta: 'Ver case',
-    stat: { value: 'Selo', label: 'identidade pensada para transmitir autoridade' },
+    stat: { value: 'Sens8', label: 'identidade pensada para transmitir autoridade' },
     text: 'No mercado de wellness, o selo precisa vender confiança primeiro. Da narrativa à paleta, cada decisão trabalha para parecer sólida e acolhedora.',
     detail: {
       lead: 'Uma identidade construída para um selo de certificação no mercado de wellness, em torno do que a marca precisa vender primeiro: confiança.',
@@ -74,7 +74,7 @@ window.PROJECTS = [
         { kicker: "O digital", title: "Perfil de Instagram com destaques em círculo", text: "O perfil usa o ícone em círculos coloridos nos destaques e fotos de bem-estar nos posts." },
         { kicker: "O site", title: "Foto de rosto e um título curto", text: "A página inicial do site combina uma foto em tom quente com uma frase direta e um botão claro." },
       ],
-      result: { big: 'Selo', text: 'uma marca que se apresenta com autoridade e calma, do símbolo à paleta.' },
+      result: { big: 'Sens8', text: 'uma marca que se apresenta com autoridade e calma, do símbolo à paleta.' },
     },
   },
   {
@@ -86,7 +86,7 @@ window.PROJECTS = [
     headline: ['Moda com', 'presença diária.'],
     sub: 'Conteúdo que preserva a identidade.',
     cta: 'Ver case',
-    stat: { value: 'Grid', label: 'motion, reels e design em um só ritmo' },
+    stat: { value: 'Conteúdo', label: 'motion, reels e design em um só ritmo' },
     text: 'Produção contínua de conteúdo para uma marca de moda, unindo o acervo da marca e novas camadas de criação sem diluir a assinatura visual.',
     detail: {
       lead: 'Estratégia e produção de conteúdo para uma marca de moda, sempre a serviço da sua identidade e da percepção que ela constrói.',
@@ -96,7 +96,7 @@ window.PROJECTS = [
         { kicker: 'O que produzimos', title: 'Design, motion, reels e legenda', text: 'Do design gráfico aos reels, das legendas à organização do grid. Cada peça é pensada na sequência em que será vista.' },
         { kicker: 'O método', title: 'Acervo da marca e IA, sob a mesma régua', text: 'Combinamos materiais de IA com o acervo da própria marca para gerar awareness sem perder a identidade. A curadoria é o que mantém tudo com a mesma cara.' },
       ],
-      result: { big: 'Grid', text: 'awareness constante, sem diluir a identidade da marca.' },
+      result: { big: 'Conteúdo', text: 'awareness constante, sem diluir a identidade da marca.' },
     },
   },
   {
@@ -265,17 +265,39 @@ window.PROJECTS = [
       result: { big: 'Altare', text: 'uma identidade que sai do papel e vai para o couro, o metal e a pele.' },
     },
   },
+  {
+    name: 'Mari Maria × Scherbi’s',
+    slug: 'mari-maria',
+    short: { headline: ['Make com', 'gosto de cookie.'] },   // phones: a shorter headline
+    tag: 'Produção de campanha',
+    colors: ['#4e1518', '#c9925e'],
+    headline: ['Maquiagem com', 'gosto de cookie.'],
+    sub: 'Campanha da collab Mari Maria Makeup × Scherbi’s.',
+    cta: 'Ver case',
+    stat: { value: 'Collab', label: 'produção executiva, direção e edição da campanha' },
+    text: 'A collab entre a Mari Maria Makeup e a Scherbi’s virou campanha de foto e vídeo. Fizemos a produção executiva, a direção e a pós-produção.',
+    detail: {
+      lead: 'Uma marca de maquiagem e uma de cookies lançando produtos juntas. A campanha precisava colocar as duas na mesma mesa, com o mesmo apetite.',
+      services: ['Produção executiva', 'Direção', 'Pós-produção', 'Edição'],
+      sections: [
+        { kicker: 'A campanha', title: 'Duas marcas na mesma mesa', text: 'Batom e cookie dividem a cena: o produto aparece na mão, na boca e no meio da massa.' },
+        { kicker: 'O produto', title: 'Embalagens no meio da bagunça', text: 'Caixas, sacolas e batons da collab aparecem entre chocolate, granulado e cookies quebrados.' },
+        { kicker: 'A direção', title: 'Close, cor quente e mesa em uso', text: 'Vinho, chocolate e caramelo na paleta, luz suave e uma mesa que parece de verdade, do set à edição dos vídeos.' },
+      ],
+      result: { big: 'Collab', text: 'uma campanha de foto e vídeo que coloca as duas marcas na mesma linguagem.' },
+    },
+  },
 ];
 
 // Photos taken from the Verso deck, to see how the real thing will look (an experiment: they can
 // repeat and be swapped freely). `hero` feeds the carousel card, the case card and the first screen
 // of the case page; `focus` is where, vertically, a wide crop of a tall photo should centre.
-const PHOTO_FOCUS = { 'all-pendre': 0.5, cantao: 0.12, sens8: 0.5, cinco: 0.5, 'oficina-ceramica': 0.4, 'estudio-ilha': 0.5, velle: 0.5, astre: 0.35, 'so-connected': 0.3, botanico: 0.5, altare: 0.5 };
+const PHOTO_FOCUS = { 'mari-maria': 0.33, 'all-pendre': 0.5, cantao: 0.12, sens8: 0.5, cinco: 0.5, 'oficina-ceramica': 0.4, 'estudio-ilha': 0.5, velle: 0.5, astre: 0.35, 'so-connected': 0.3, botanico: 0.5, altare: 0.5 };
 // bump this whenever a picture is replaced, so phones and the CDN fetch the new file instead of the cached one
-const ASSET_V = 23;
-const PHOTO_CARD = { cantao: true, sens8: true, 'oficina-ceramica': true, 'so-connected': true, astre: true, altare: true, velle: true, botanico: true };
+const ASSET_V = 24;
+const PHOTO_CARD = { 'all-pendre': true, 'mari-maria': true, cantao: true, sens8: true, 'oficina-ceramica': true, 'so-connected': true, astre: true, altare: true, velle: true, botanico: true };
 // cases with a high-resolution copy of their slide picture (same framing), shown when the case opens full screen
-const PHOTO_FULL = { altare: true, velle: true, botanico: true, sens8: true, 'oficina-ceramica': true };
+const PHOTO_FULL = { 'all-pendre': true, 'mari-maria': true, altare: true, velle: true, botanico: true, sens8: true, 'oficina-ceramica': true };
 const PHOTO_RATIO = { sens8: 1, botanico: 0.667 };
 const SECTION_RATIOS = {   // overrides, per section: width / height of the picture
   velle: [0.78, 0.667, 1.5, 0.667, 0.667],
@@ -283,10 +305,21 @@ const SECTION_RATIOS = {   // overrides, per section: width / height of the pict
   altare: [0.8, 1.778, 0.8, 1.778, 1.778, 1.778, 1.778, 1.778],
   sens8: [1.778, 1.778, 1.778, 1.778, 1.778, 1.778, 1.778, 1.778],
   'oficina-ceramica': [0, 0.75, 0.75],
+  'mari-maria': [0.667, 0.667, 0.667],
 };
-// strips of posts / photos shown before the result: slug -> [how many pictures, title, ratio, file key]
-// (a list of them for a case with more than one strip; files are <slug>-<key><n>.jpg, key 'g' by default)
+// strips of posts / photos / videos shown before the result: slug -> [how many, title, ratio, file key, extension]
+// (a list of them for a case with more than one strip; files are <slug>-<key><n>.<ext>, key 'g' and 'jpg' by default;
+// an .mp4 strip also needs a <slug>-<key><n>.jpg poster)
 const GALLERY = {
+  'all-pendre': [
+    [3, 'Ensaio da casa', 0.75, 'f'],
+    [6, 'Posts criativos', 0.75],
+  ],
+  cinco: [4, 'Os vídeos', 0.5625, 'v', 'mp4'],
+  'mari-maria': [
+    [3, 'Mais do ensaio', 0.667],
+    [2, 'Os vídeos da campanha', 0.5625, 'v', 'mp4'],
+  ],
   cantao: [7, 'Como vender jeans, em sete posts', 0.8],
   'so-connected': [
     [9, 'O carrossel sobre música latina', 0.8],
@@ -301,6 +334,6 @@ PROJECTS.forEach((p) => {
   p.images = { card: `assets/cases/${p.slug}-card.jpg?v=${ASSET_V}`, heroPortrait: own && `assets/cases/${p.slug}-card-m.jpg?v=${ASSET_V}`, heroLandscape: own && `assets/cases/${p.slug}-card-d.jpg?v=${ASSET_V}`, hero: `assets/cases/${p.slug}-hero.jpg?v=${ASSET_V}`, focus: PHOTO_FOCUS[p.slug] };
   if (PHOTO_FULL[p.slug]) { p.images.fullPortrait = `assets/cases/${p.slug}-full-m.jpg?v=${ASSET_V}`; p.images.fullLandscape = `assets/cases/${p.slug}-full-d.jpg?v=${ASSET_V}`; }
   const g = GALLERY[p.slug];
-  if (g) p.galleries = (Array.isArray(g[0]) ? g : [g]).map(([n, title, ratio, key = 'g']) => ({ title, ratio, items: Array.from({ length: n }, (_, k) => `assets/cases/${p.slug}-${key}${k + 1}.jpg?v=${ASSET_V}`) }));
+  if (g) p.galleries = (Array.isArray(g[0]) ? g : [g]).map(([n, title, ratio, key = 'g', ext = 'jpg']) => ({ title, ratio, items: Array.from({ length: n }, (_, k) => `assets/cases/${p.slug}-${key}${k + 1}.${ext}?v=${ASSET_V}`) }));
   p.detail.sections.forEach((s, k) => { s.image = `assets/cases/${p.slug}-s${k + 1}.jpg?v=${ASSET_V}`; const r = SECTION_RATIOS[p.slug]; if (r && r[k]) s.ratio = r[k]; });
 });

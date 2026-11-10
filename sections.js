@@ -7,8 +7,8 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
 const BRANDS = [
   'Riachuelo', 'Allpendre', 'LoveWorkz', 'A Oficina Cerâmica', 'Cinco', 'Kalimo', 'The Vault',
-  'Laneige', 'Beit Engenharia', 'Cantão', 'Velle', 'Altare', 'Heavy House', 'Rare Beauty', 'Bar Botânico', 'Mari Maria', 'Scherbis',
-  'Brisa', 'Épice', 'Valentina Gorentzvaig', 'So.Connected',
+  'Laneige', 'Beit Engenharia', 'Cantão', 'Velle', 'Altare', 'Heavy House', 'Rare Beauty', 'Bar Botânico', 'Mari Maria', 'Scherbi’s',
+  'Brisa', 'Épice', 'Valentina Gorentzvaig', 'So.Connected', 'Nabahia', 'Celimax',
 ];
 
 // Vector wordmark (logo.js) as an inline SVG that takes its colour from CSS `color`.

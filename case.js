@@ -26,6 +26,7 @@ window.CaseView = (function () {
   let source = null;    // 'carousel' | 'card'
   let busy = false;
   let triggers = [];
+  let videoWatch = null; // plays the gallery videos that are in view
   const pad = (n) => String(n).padStart(2, '0');
 
   // ---------- page content ----------
@@ -78,7 +79,9 @@ window.CaseView = (function () {
 
         ${sections}
 
-        ${(p.galleries || []).map((g) => `<section class="cd-gal"><h2 class="cd-gal__h">${g.title}</h2><div class="cd-gal__track" style="--ar:${g.ratio}">${g.items.map((u, n) => `<img src="${u}" alt="${p.name}: ${g.title} ${n + 1}" loading="lazy" draggable="false">`).join('')}</div></section>`).join('')}
+        ${(p.galleries || []).map((g) => `<section class="cd-gal"><h2 class="cd-gal__h">${g.title}</h2><div class="cd-gal__track" style="--ar:${g.ratio}">${g.items.map((u, n) => (/\.mp4(\?|$)/.test(u)
+          ? `<video src="${u}" poster="${u.replace(/\.mp4(\?|$)/, '.jpg$1')}" muted loop playsinline preload="none" aria-label="${p.name}: ${g.title} ${n + 1}"></video>`
+          : `<img src="${u}" alt="${p.name}: ${g.title} ${n + 1}" loading="lazy" draggable="false">`)).join('')}</div></section>`).join('')}
 
         <section class="cd-result" style="--c1:${p.colors[0]}">
           <span class="cd-result__big">${d.result.big}</span>
@@ -98,6 +101,14 @@ window.CaseView = (function () {
           </div>
         </section>
       </div>`;
+
+    // gallery videos play only while they're on screen (muted, looping), and load only then
+    videoWatch?.disconnect();
+    const vids = $$('.cd-gal video', content);
+    videoWatch = vids.length ? new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (e.isIntersecting) e.target.play().catch(() => {}); else e.target.pause();
+    }), { root: overlay, threshold: 0.5 }) : null;
+    vids.forEach((v) => videoWatch.observe(v));
 
     document.title = `${p.name} — Verso Digital`;
     $('[data-next]', content).addEventListener('click', (e) => { e.preventDefault(); switchTo((i + 1) % N); });
