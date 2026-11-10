@@ -631,6 +631,9 @@ html.menu-open .island .island__edge path { stroke: rgba(255, 255, 255, 0.2); }
     linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) 22%, transparent 40%);
 }
 .cd-hero > * { position: relative; z-index: 1; }
+/* opened from a card on the home page: the case shows that card's own picture (the carousel's stays for the carousel) */
+.cd-hero { isolation: isolate; }
+.cd-hero > .cd-hero__bg { position: absolute; inset: 0; z-index: -1; background: center / cover no-repeat; }
 .cd-hero > .cd-hero__lead { position: absolute; }
 .cd-lead__h { margin: 0; font: inherit; }
 .cd-lead__h span { display: block; white-space: nowrap; }

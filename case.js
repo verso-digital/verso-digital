@@ -57,6 +57,7 @@ window.CaseView = (function () {
     const sub = phone ? '' : (p.sub || '');
     content.innerHTML = `
       <section class="cd-hero">
+        ${source === 'card' ? `<div class="cd-hero__bg" style="background-image:url(${p.images.card || p.images.hero})"></div>` : ''}
         <div class="cd-hero__lead">
           <h2 class="cd-lead__h">${lines.map((l) => `<span>${l}</span>`).join('')}</h2>
           ${sub ? `<p class="cd-lead__sub">${sub}</p>` : ''}
@@ -243,29 +244,24 @@ window.CaseView = (function () {
     clone.style.zIndex = '55';   // under the case page, so its title can rise over the picture while it is still arriving
     document.body.appendChild(clone);
     place(clone, r, 20);
-    const layer = bareLayer(clone, i);
     media.style.visibility = 'hidden';
-    stageEl.style.opacity = '0';
+    stageEl.style.opacity = '0';   // the carousel stays out of it: the case shows the card's own picture
     root.classList.add('has-case');
     history.pushState({ case: slugOf(i) }, '', `#/cases/${slugOf(i)}`);
 
-    // the card's picture grows to the window; on the way its crop turns into the slide's and the stat box goes
+    // the card's picture grows to the window and settles into a plain centred crop (the same one the case
+    // page uses for its first screen), while the stat box goes
     const grow = gsap.timeline()
       .to(clone, { ...full(), borderRadius: 0, duration: 1.2, ease: 'expo.inOut' }, 0)
-      .to(layer, { opacity: 1, duration: 0.7, ease: 'power1.inOut' }, 0.1)
+      .to($('.case__img', clone), { yPercent: 0, scale: 1, top: 0, right: 0, bottom: 0, left: 0, duration: 1.2, ease: 'expo.inOut' }, 0)
       .to($('.case__stat', clone), { opacity: 0, duration: 0.3, ease: 'power1.out' }, 0);
     await new Promise((res) => grow.call(res, null, 0.9));
 
-    // nearly there: the full-screen slide (the same picture, same crop) takes over underneath and the page's
-    // title comes up over it. Nothing fades into anything else.
-    stageEl.classList.add('is-fixed');
-    carousel.relayout();
-    carousel.setCover(i, 1);
+    // nearly there: the page comes up over the clone with the very same picture as its background
     gsap.set(hero, { opacity: 0 });
-    stageEl.style.opacity = '1';
     show(i, 0.35);
     await new Promise((res) => grow.eventCallback('onComplete', res));
-    await new Promise((res) => gsap.ticker.add(function f() { gsap.ticker.remove(f); res(); }));   // one drawn frame of the slide before the clone goes
+    await new Promise((res) => gsap.delayedCall(0.4, res));   // the page is fully in before the clone goes
     clone.remove();
     busy = false;
   }
@@ -291,6 +287,23 @@ window.CaseView = (function () {
         gsap.set(fly, { left: r.left, top: r.top, x: 0, y: 0, scale: 1 });
       }
     }
+    // from a card: a full-screen copy of the card waits under the page, so fading the page out shows the same
+    // picture, which then shrinks back into the card
+    let back = null;
+    if (source === 'card') {
+      const media = $$('.case')[i].querySelector('.case__media');
+      media.scrollIntoView({ block: 'center', behavior: 'instant' });
+      const clone = cloneOf(media);
+      clone.style.zIndex = '55';   // under the case page
+      document.body.appendChild(clone);
+      place(clone, { ...full() }, 0);
+      const img = $('.case__img', clone);
+      const end = { yPercent: gsap.getProperty($('.case__img', media), 'yPercent'), scale: gsap.getProperty($('.case__img', media), 'scale') };
+      gsap.set(img, { yPercent: 0, scale: 1, top: 0, right: 0, bottom: 0, left: 0 });
+      const stat = $('.case__stat', clone);
+      if (stat) stat.style.opacity = '0';
+      back = { media, clone, img, end, stat };
+    }
     await new Promise((res) => gsap.to(overlay, { opacity: 0, duration: 0.45, ease: 'power2.out', onComplete: res }));
     overlay.hidden = true;
     gsap.set(overlay, { clearProps: 'opacity,transform,borderRadius' });
@@ -311,22 +324,13 @@ window.CaseView = (function () {
       stageEl.classList.remove('is-fixed');
       carousel.relayout();
     } else {
-      const media = $$('.case')[i].querySelector('.case__media');
-      media.scrollIntoView({ block: 'center', behavior: 'instant' });
+      const { media, clone, img, end, stat } = back;
       const r = media.getBoundingClientRect();
-      const clone = cloneOf(media);
-      document.body.appendChild(clone);
-      place(clone, { ...full() }, 0);
-      const layer = bareLayer(clone, i);
-      layer.style.opacity = '1';
-      const stat = $('.case__stat', clone);
-      if (stat) stat.style.opacity = '0';
-      stageEl.style.opacity = '0';
       stageEl.classList.remove('is-fixed');
       carousel.setCover(-1, 0);
       gsap.set(hero, { clearProps: 'opacity' });
-      // shrinking back: the slide's crop turns into the card's, and the stat box returns at the end
-      gsap.to(layer, { opacity: 0, duration: 0.7, delay: 0.15, ease: 'power1.inOut' });
+      // shrinking back into the card, with the card's own crop and drift, and the stat box at the end
+      gsap.to(img, { yPercent: end.yPercent, scale: end.scale, top: '-8%', right: '-8%', bottom: '-8%', left: '-8%', duration: 1.1, ease: 'expo.inOut' });
       if (stat) gsap.to(stat, { opacity: 1, duration: 0.4, delay: 0.7, ease: 'power1.out' });
       await new Promise((res) => gsap.to(clone, { left: r.left, top: r.top, width: r.width, height: r.height, borderRadius: 20, duration: 1.1, ease: 'expo.inOut', onComplete: res }));
       media.style.visibility = '';
