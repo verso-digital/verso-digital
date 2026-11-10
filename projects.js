@@ -272,7 +272,7 @@ window.PROJECTS = [
 // of the case page; `focus` is where, vertically, a wide crop of a tall photo should centre.
 const PHOTO_FOCUS = { 'all-pendre': 0.5, cantao: 0.12, sens8: 0.5, cinco: 0.5, 'oficina-ceramica': 0.4, 'estudio-ilha': 0.5, velle: 0.5, astre: 0.35, 'so-connected': 0.3, botanico: 0.5, altare: 0.5 };
 // bump this whenever a picture is replaced, so phones and the CDN fetch the new file instead of the cached one
-const ASSET_V = 22;
+const ASSET_V = 23;
 const PHOTO_CARD = { cantao: true, sens8: true, 'oficina-ceramica': true, 'so-connected': true, astre: true, altare: true, velle: true, botanico: true };
 // cases with a high-resolution copy of their slide picture (same framing), shown when the case opens full screen
 const PHOTO_FULL = { altare: true, velle: true, botanico: true, sens8: true, 'oficina-ceramica': true };
@@ -284,10 +284,14 @@ const SECTION_RATIOS = {   // overrides, per section: width / height of the pict
   sens8: [1.778, 1.778, 1.778, 1.778, 1.778, 1.778, 1.778, 1.778],
   'oficina-ceramica': [0, 0.75, 0.75],
 };
-// strips of posts / photos shown before the result: slug -> [how many pictures, title, ratio]
+// strips of posts / photos shown before the result: slug -> [how many pictures, title, ratio, file key]
+// (a list of them for a case with more than one strip; files are <slug>-<key><n>.jpg, key 'g' by default)
 const GALLERY = {
   cantao: [7, 'Como vender jeans, em sete posts', 0.8],
-  'so-connected': [9, 'O carrossel sobre música latina', 0.8],
+  'so-connected': [
+    [9, 'O carrossel sobre música latina', 0.8],
+    [8, 'Os países que mais escutam música brasileira', 0.8, 'p'],
+  ],
   'estudio-ilha': [5, 'Posts da campanha Heineken', 0.8],
   'oficina-ceramica': [8, 'Do barro à peça: processo e resultado', 0.75],
 };
@@ -297,6 +301,6 @@ PROJECTS.forEach((p) => {
   p.images = { card: `assets/cases/${p.slug}-card.jpg?v=${ASSET_V}`, heroPortrait: own && `assets/cases/${p.slug}-card-m.jpg?v=${ASSET_V}`, heroLandscape: own && `assets/cases/${p.slug}-card-d.jpg?v=${ASSET_V}`, hero: `assets/cases/${p.slug}-hero.jpg?v=${ASSET_V}`, focus: PHOTO_FOCUS[p.slug] };
   if (PHOTO_FULL[p.slug]) { p.images.fullPortrait = `assets/cases/${p.slug}-full-m.jpg?v=${ASSET_V}`; p.images.fullLandscape = `assets/cases/${p.slug}-full-d.jpg?v=${ASSET_V}`; }
   const g = GALLERY[p.slug];
-  if (g) p.gallery = { title: g[1], ratio: g[2], items: Array.from({ length: g[0] }, (_, k) => `assets/cases/${p.slug}-g${k + 1}.jpg?v=${ASSET_V}`) };
+  if (g) p.galleries = (Array.isArray(g[0]) ? g : [g]).map(([n, title, ratio, key = 'g']) => ({ title, ratio, items: Array.from({ length: n }, (_, k) => `assets/cases/${p.slug}-${key}${k + 1}.jpg?v=${ASSET_V}`) }));
   p.detail.sections.forEach((s, k) => { s.image = `assets/cases/${p.slug}-s${k + 1}.jpg?v=${ASSET_V}`; const r = SECTION_RATIOS[p.slug]; if (r && r[k]) s.ratio = r[k]; });
 });
