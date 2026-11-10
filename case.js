@@ -27,6 +27,7 @@ window.CaseView = (function () {
   let busy = false;
   let triggers = [];
   let videoWatch = null; // plays the gallery videos that are in view
+  let swapping = false;  // building the next case from the "next case" card: its first screen shows that card's picture
   const pad = (n) => String(n).padStart(2, '0');
 
   // ---------- page content ----------
@@ -58,7 +59,7 @@ window.CaseView = (function () {
     const sub = phone ? '' : (p.sub || '');
     content.innerHTML = `
       <section class="cd-hero">
-        ${source === 'card' ? `<div class="cd-hero__bg" style="background-image:url(${p.images.card || p.images.hero})"></div>` : ''}
+        ${source === 'card' || swapping ? `<div class="cd-hero__bg" style="background-image:url(${p.images.card || p.images.hero})"></div>` : ''}
         <div class="cd-hero__lead">
           <h2 class="cd-lead__h">${lines.map((l) => `<span>${l}</span>`).join('')}</h2>
           ${sub ? `<p class="cd-lead__sub">${sub}</p>` : ''}
@@ -375,20 +376,34 @@ window.CaseView = (function () {
   }
 
   // jump to another case without leaving the page (the "next case" link)
+  // The card's own picture (a copy, without its text) grows to fill the window; the next page is built
+  // underneath with that same picture as its first screen, and the copy dissolves into it.
   async function switchTo(i) {
     if (busy || current < 0) return;
     busy = true;
     triggers.forEach((t) => t.kill());
     triggers = [];
-    gsap.to(content, { y: -90, duration: 0.5, ease: 'power2.in' });
-    await new Promise((res) => gsap.to(overlay, { opacity: 0, duration: 0.45, ease: 'power2.out', onComplete: res }));
-    carousel.resume();
-    carousel.setCover(i, 1);
+    videoWatch?.disconnect();
+    const link = $('[data-next]', content);
+    const r = link.getBoundingClientRect();
+    const pic = document.createElement('div');
+    pic.className = 'cd-swap';
+    pic.style.backgroundImage = $('.cd-next__bg', link).style.backgroundImage;
+    document.body.appendChild(pic);
+    place(pic, r, parseFloat(getComputedStyle(link).borderTopLeftRadius) || 24);
+    gsap.to($$('.cd-next__label, .cd-next__name, .cd-next__tag', link), { opacity: 0, y: -10, duration: 0.25, ease: 'power2.in' });
+    await new Promise((res) => gsap.to(pic, { ...full(), borderRadius: 0, duration: 1, ease: 'expo.inOut', onComplete: res }));
+
+    // hidden behind the picture: the carousel moves to this case (so closing lands on it), and the page swaps
+    if (source === 'carousel') { carousel.resume(); carousel.setCover(i, 1); }
+    // opened from the list: the card that is "out" (hidden while its case is open) is now this one
+    if (source === 'card') $$('.case').forEach((c, k) => { const m = $('.case__media', c); if (m) m.style.visibility = k === i ? 'hidden' : ''; });
     history.replaceState({ case: slugOf(i) }, '', `#/cases/${slugOf(i)}`);
-    await new Promise((res) => gsap.delayedCall(0.2, res));
+    swapping = true;
+    show(i, 0.01);
+    swapping = false;
+    gsap.to(pic, { opacity: 0, duration: 0.7, delay: 0.1, ease: 'power1.out', onComplete: () => pic.remove() });
     busy = false;
-    show(i, 0.6);
-    gsap.fromTo(content, { y: 110 }, { y: 0, duration: 1.1, ease: 'expo.out', clearProps: 'transform' });
   }
 
   // ---------- opening straight from the address (a shared link, a reload, "forward") ----------

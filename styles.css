@@ -271,9 +271,22 @@ html.is-loading .footer { visibility: hidden; }
 }
 .footer__title { margin-top: clamp(10px, 2svh, 24px); font-family: var(--serif); font-weight: 400; font-size: clamp(32px, min(6vw, 7.4svh), 108px); line-height: 1; letter-spacing: -0.015em; }
 .footer__cols { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 100px); margin-top: clamp(16px, 3.4svh, 56px); }
-.form { display: grid; gap: clamp(10px, 2.2svh, 22px); align-content: start; }
-.field { display: grid; gap: 2px; }
-.field span { font-size: 13px; color: rgba(227, 227, 220, 0.62); }
+.form { display: grid; align-content: start; }
+.form [hidden] { display: none !important; }
+.form__body { display: grid; gap: clamp(10px, 2.2svh, 22px); align-content: start; }
+.field { position: relative; display: grid; gap: 2px; }
+.field span {
+  font-size: 13px; color: rgba(227, 227, 220, 0.62); transform-origin: 0 100%;
+  transition: color 0.4s, transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), letter-spacing 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+/* focus: the label lifts and lights up, and a bright line draws itself across, left to right */
+.field::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px; background: var(--paper);
+  transform: scaleX(0); transform-origin: 0 50%; transition: transform 0.9s cubic-bezier(0.19, 1, 0.22, 1); pointer-events: none;
+}
+.field:focus-within::after { transform: scaleX(1); }
+.field:focus-within span { color: var(--paper); transform: translateY(-3px); letter-spacing: 0.02em; }
+.field.is-error::after { background: #e58b7a; transform: scaleX(1); }
 .field input, .field textarea {
   width: 100%; padding: 8px 0 10px; font: inherit; font-size: clamp(16px, 2.6svh, 20px); color: var(--paper); background: transparent;
   border: 0; border-bottom: 1px solid rgba(227, 227, 220, 0.3); border-radius: 0; resize: none; outline: none;
@@ -288,7 +301,20 @@ html.is-loading .footer { visibility: hidden; }
   transition: gap 0.5s cubic-bezier(0.19, 1, 0.22, 1), background-color 0.4s;
 }
 .btn:hover { gap: 22px; background: #fff; }
-.form__ok { font-size: 15px; color: rgba(227, 227, 220, 0.85); }
+.form__err { font-size: 15px; line-height: 1.45; color: #e58b7a; max-width: 44ch; }
+/* after sending: in the fields' place, a tick, a big thank-you and a quiet way to write again */
+.form:has(.form__done:not([hidden])) { align-content: center; }
+.form__done { display: grid; justify-items: start; gap: clamp(10px, 1.8svh, 16px); }
+.form__check { width: 56px; height: 56px; margin-bottom: clamp(4px, 1svh, 10px); fill: none; stroke: var(--paper); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+.form__eyebrow { font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(227, 227, 220, 0.62); }
+.form__thanks { overflow: hidden; padding-bottom: 0.06em; font-family: var(--serif); font-weight: 400; font-size: clamp(44px, min(6.2vw, 10svh), 104px); line-height: 1; letter-spacing: -0.015em; }
+.form__line, .form__thanks [data-thanks] { display: inline-block; }
+.form__note { max-width: 34ch; font-size: clamp(15px, 2.1svh, 18px); line-height: 1.45; color: rgba(227, 227, 220, 0.82); }
+.form__again {
+  margin-top: 4px; padding: 0; background: none; border: 0; font: inherit; font-size: 13px; letter-spacing: 0.02em; color: rgba(227, 227, 220, 0.62); cursor: pointer;
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color 0.3s;
+}
+.form__again:hover { color: var(--paper); }
 .direct { display: grid; gap: clamp(8px, 1.6svh, 14px); align-content: start; }
 .direct__label { font-size: 13px; color: rgba(227, 227, 220, 0.62); margin-bottom: 4px; }
 .direct__link { width: fit-content; font-family: var(--serif); font-size: clamp(22px, min(2.6vw, 4.4svh), 38px); line-height: 1.1; border-bottom: 1px solid transparent; transition: border-color 0.4s; overflow-wrap: anywhere; }
@@ -649,6 +675,8 @@ html.menu-open .island .island__edge path { stroke: rgba(255, 255, 255, 0.2); }
 .case__img.ph-photo { background-size: cover; background-position: center var(--focus, 50%); }
 .cd-img__in.has-photo { inset: -2%; background-size: cover; background-position: center; }
 .cd-next__bg { background-size: cover; background-position: center; }
+/* the "next case" card's picture on its way to filling the window */
+.cd-swap { position: fixed; z-index: 65; pointer-events: none; overflow: hidden; background: center / cover no-repeat; }
 
 /* ---------- menu: taps and swipes ---------- */
 .menu-veil, .menu { touch-action: none; }

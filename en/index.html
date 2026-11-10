@@ -213,11 +213,20 @@
 
     <div class="footer__cols">
       <form class="form" id="contactForm" novalidate>
-        <label class="field"><span>Your name</span><input name="nome" type="text" autocomplete="name" required></label>
-        <label class="field"><span>Email</span><input name="email" type="email" autocomplete="email" required></label>
-        <label class="field"><span>Tell us a little about the brand</span><textarea name="mensagem" rows="2" required></textarea></label>
-        <button class="btn" type="submit"><span class="btn__label">Send message</span><span class="btn__arrow" aria-hidden="true">→</span></button>
-        <p class="form__ok" id="formOk" role="status" hidden>Received! We will reply shortly.</p>
+        <div class="form__body">
+          <label class="field"><span>Your name</span><input name="nome" type="text" autocomplete="name" required></label>
+          <label class="field"><span>Email</span><input name="email" type="email" autocomplete="email" required></label>
+          <label class="field"><span>Tell us a little about the brand</span><textarea name="mensagem" rows="2" required></textarea></label>
+          <button class="btn" type="submit"><span class="btn__label">Send message</span><span class="btn__arrow" aria-hidden="true">→</span></button>
+          <p class="form__err" id="formErr" role="alert" hidden>We couldn’t send it right now. Try again, or write straight to the e-mail address alongside.</p>
+        </div>
+        <div class="form__done" id="formDone" role="status" hidden>
+          <svg class="form__check" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><path d="M17 29.5l7.5 7.5L40 21.5"/></svg>
+          <p class="form__eyebrow">Message sent</p>
+          <p class="form__thanks"><span class="form__line"><span data-thanks="Thank you">Thank you.</span></span></p>
+          <p class="form__note">It has reached us. We’ll reply to the e-mail address you left.</p>
+          <button class="form__again" type="button">Send another message</button>
+        </div>
       </form>
 
       <div class="direct">

@@ -213,11 +213,20 @@
 
     <div class="footer__cols">
       <form class="form" id="contactForm" novalidate>
-        <label class="field"><span>Seu nome</span><input name="nome" type="text" autocomplete="name" required></label>
-        <label class="field"><span>E-mail</span><input name="email" type="email" autocomplete="email" required></label>
-        <label class="field"><span>Conte um pouco sobre a marca</span><textarea name="mensagem" rows="2" required></textarea></label>
-        <button class="btn" type="submit"><span class="btn__label">Enviar mensagem</span><span class="btn__arrow" aria-hidden="true">→</span></button>
-        <p class="form__ok" id="formOk" role="status" hidden>Recebido! Respondemos por aqui em breve.</p>
+        <div class="form__body">
+          <label class="field"><span>Seu nome</span><input name="nome" type="text" autocomplete="name" required></label>
+          <label class="field"><span>E-mail</span><input name="email" type="email" autocomplete="email" required></label>
+          <label class="field"><span>Conte um pouco sobre a marca</span><textarea name="mensagem" rows="2" required></textarea></label>
+          <button class="btn" type="submit"><span class="btn__label">Enviar mensagem</span><span class="btn__arrow" aria-hidden="true">→</span></button>
+          <p class="form__err" id="formErr" role="alert" hidden>Não conseguimos enviar agora. Tente de novo ou escreva direto para o e-mail ao lado.</p>
+        </div>
+        <div class="form__done" id="formDone" role="status" hidden>
+          <svg class="form__check" viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="26"/><path d="M17 29.5l7.5 7.5L40 21.5"/></svg>
+          <p class="form__eyebrow">Mensagem enviada</p>
+          <p class="form__thanks"><span class="form__line"><span data-thanks="Obrigado">Obrigado.</span></span></p>
+          <p class="form__note">Ela já chegou para a gente. Respondemos no e-mail que você deixou.</p>
+          <button class="form__again" type="button">Enviar outra mensagem</button>
+        </div>
       </form>
 
       <div class="direct">
