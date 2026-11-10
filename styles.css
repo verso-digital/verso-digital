@@ -679,3 +679,19 @@ html.menu-open .island .island__edge path { stroke: rgba(255, 255, 255, 0.2); }
   border-radius: 6px; scroll-snap-align: start; background: rgba(0, 0, 0, 0.06);
 }
 @media (max-width: 767px) { .cd-gal__track img { height: auto; width: 76vw; } }
+
+/* ---------- selection, taps and focus in the Verso palette (instead of the browser's light blue) ---------- */
+html { -webkit-tap-highlight-color: transparent; }
+::selection { background: var(--forest); color: var(--paper); }
+.footer ::selection, .hero ::selection, .header ::selection, .cd-hero ::selection, .menu ::selection { background: var(--paper); color: var(--forest); }
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--forest); outline-offset: 3px; border-radius: 4px; }
+.footer :focus-visible, .header :focus-visible, .menu :focus-visible, .cd-hero :focus-visible { outline-color: var(--paper); }
+.field input, .field textarea { caret-color: var(--paper); }
+/* the browser's autofill paints inputs light blue: keep them on the green */
+.field input:-webkit-autofill, .field input:-webkit-autofill:hover, .field input:-webkit-autofill:focus, .field textarea:-webkit-autofill {
+  -webkit-text-fill-color: var(--paper); caret-color: var(--paper);
+  -webkit-box-shadow: 0 0 0 1000px var(--forest) inset; box-shadow: 0 0 0 1000px var(--forest) inset;
+  transition: background-color 9999s ease-out 0s;
+}
+input, textarea, button, select { accent-color: var(--forest); }

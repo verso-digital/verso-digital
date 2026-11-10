@@ -99,9 +99,15 @@ window.Menu = (function () {
       return;
     }
     e.preventDefault();
-    go(a.getAttribute('href'));
+    const href = a.getAttribute('href');
+    // the PT | EN switch is a real page change: close the menu and go there, keeping an open case
+    if (!href.startsWith('#')) { close(); location.href = href + (location.hash || ''); return; }
+    go(href);
   }));
   island.addEventListener('click', (e) => { e.preventDefault(); go('#top'); });
+
+  // coming back with the browser's back button (page restored from cache): finish any half-run animation
+  addEventListener('pageshow', (e) => { if (e.persisted && tl) tl.progress(1); });
 
   return { open, close, get isOpen() { return isOpen; } };
 })();

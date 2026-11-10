@@ -168,3 +168,9 @@ if (reloaded && !/^#\/cases\//.test(location.hash)) {
   if (reloaded) whenReady().then(() => reveal(true));   // reloaded with a case open: the case is put back when the site comes in
   else runLogoLoader(whenReady()).then(() => reveal());
 }
+
+// PT | EN in the desktop header: keep an open case when switching language
+$$('.header .lang').forEach((a) => a.addEventListener('click', (e) => {
+  e.preventDefault();
+  location.href = a.getAttribute('href') + (location.hash || '');
+}));
