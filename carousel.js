@@ -525,14 +525,26 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
     const padX = fontPx * 0.95, ph = fontPx * 2;
     const pw = g.measureText(text).width + padX * 2;
     const x = rightX - pw;
+    // a smoky tint, so the white name reads on a pale photo as well as on a dark one: darker on pale photos
+    const tint = Math.min(0.78, 0.38 + 0.6 * meanLum(g, x, topY, pw, ph));
     g.beginPath();
     if (g.roundRect) g.roundRect(x, topY, pw, ph, ph / 2); else g.rect(x, topY, pw, ph);
-    // a smoky tint, so the white name reads on a pale photo as well as on a dark one
-    g.fillStyle = 'rgba(18,20,16,.38)'; g.fill();
+    g.fillStyle = `rgba(18,20,16,${tint})`; g.fill();
     g.lineWidth = Math.max(2, fontPx * 0.08); g.strokeStyle = 'rgba(255,255,255,.55)'; g.stroke();
     g.fillStyle = '#fff';
     g.fillText(text, x + padX, topY + ph / 2 + 1);
     return ph;
+  }
+
+  // average relative luminance (0 black … 1 white) of a region of the canvas, sampled every few pixels
+  function meanLum(g, x, y, w, h) {
+    try {
+      const d = g.getImageData(Math.round(x), Math.round(y), Math.round(w), Math.round(h)).data;
+      const lin = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
+      let sum = 0, n = 0;
+      for (let i = 0; i < d.length; i += 4 * 7) { sum += 0.2126 * lin(d[i]) + 0.7152 * lin(d[i + 1]) + 0.0722 * lin(d[i + 2]); n++; }
+      return n ? sum / n : 0;
+    } catch (e) { return 0.4; }   // a tainted canvas can't be read: assume a fairly bright photo
   }
 
   // layout of the headline block inside a picture, shared by the drawing code and by textAnchor()
@@ -588,9 +600,13 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
       g.beginPath(); g.arc(w * (portrait ? 0.7 : 0.62), h * (portrait ? 0.22 : 0.3), portrait ? 28 : 34, 0, Math.PI * 2); g.fill();
     }
 
-    // scrim for legibility: from the left on wide cards, from the bottom on tall ones
+    // scrim for legibility: from the left on wide cards, from the bottom on tall ones. Its strength
+    // follows how bright the photo is behind the headline, so pale photos get a darker veil.
+    const behind = portrait ? meanLum(g, 48, 700, 652, 360) : meanLum(g, 40, 100, 760, 420);
+    const a = portrait ? Math.min(0.9, Math.max(0.6, 0.6 + 0.9 * behind)) : Math.min(0.82, Math.max(0.45, 0.45 + 0.8 * behind));
     const scrim = portrait ? g.createLinearGradient(0, h, 0, h * 0.3) : g.createLinearGradient(0, 0, w * 0.75, 0);
-    scrim.addColorStop(0, portrait ? 'rgba(0,0,0,.62)' : 'rgba(0,0,0,.42)');
+    scrim.addColorStop(0, `rgba(0,0,0,${a})`);
+    scrim.addColorStop(0.5, `rgba(0,0,0,${a * 0.6})`);
     scrim.addColorStop(1, 'rgba(0,0,0,0)');
     g.fillStyle = scrim; g.fillRect(0, 0, w, h);
 
@@ -612,6 +628,8 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
 
     g.textBaseline = 'alphabetic';
     g.fillStyle = '#fff';
+    // a soft shadow under the white headline, for the bright spots the veil doesn't fully cover
+    g.shadowColor = 'rgba(0,0,0,.45)'; g.shadowBlur = portrait ? 28 : 22; g.shadowOffsetY = 2;
     if (portrait) {
       // phones: a short headline and the button, anchored to the bottom of the card
       const fs = 80;
@@ -621,6 +639,7 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
       let y = by - 44 - (lines.length - 1) * fs * 1.08;
       g.font = `500 ${fs}px "Inter Tight", sans-serif`;
       lines.forEach((line) => { g.fillText(line, 48, y); y += fs * 1.08; });
+      g.shadowColor = 'transparent';
       g.beginPath(); g.roundRect ? g.roundRect(48, by, bw, bh, bh / 2) : g.rect(48, by, bw, bh); g.fill();
       g.fillStyle = '#0a0a0a'; g.font = '500 30px "Inter Tight", sans-serif';
       g.fillText(p.cta, 48 + 30, by + 46);
@@ -641,6 +660,7 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
     g.font = '500 24px "Inter Tight", sans-serif';
     const bw = g.measureText(p.cta).width + 56, bh = 64, by = y + 22;
     g.fillStyle = '#fff';
+    g.shadowColor = 'transparent';
     g.beginPath(); g.roundRect ? g.roundRect(56, by, bw, bh, 32) : g.rect(56, by, bw, bh); g.fill();
     g.fillStyle = '#0a0a0a';
     g.fillText(p.cta, 56 + 28, by + 40);

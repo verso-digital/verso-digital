@@ -202,11 +202,13 @@ html.is-loading .footer { visibility: hidden; }
   position: absolute; left: 18px; bottom: 18px; max-width: calc(100% - 36px);
   display: flex; flex-direction: column; gap: 2px; padding: 12px 16px 13px;
   color: #fff; border-radius: 14px;
-  background: rgba(246, 241, 234, 0.16); border: 1px solid rgba(255, 255, 255, 0.28);
-  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  /* dark smoked glass: the white text keeps its contrast on pale photos too */
+  background: rgba(16, 18, 14, 0.52); border: 1px solid rgba(255, 255, 255, 0.22);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
 }
 .case__stat b { font-family: var(--serif); font-weight: 500; font-size: 34px; line-height: 1; }
-.case__stat span { font-size: 13px; max-width: 24ch; opacity: 0.9; }
+.case__stat span { font-size: 13px; max-width: 24ch; opacity: 0.95; }
 .case__meta { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-top: clamp(10px, 2svh, 18px); }
 .case__name { font-family: var(--serif); font-weight: 500; font-size: clamp(26px, min(2.6vw, 4.6svh), 40px); line-height: 1; }
 .case__tag { font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-dim); }
@@ -619,7 +621,17 @@ html.menu-open .island .island__edge path { stroke: rgba(255, 255, 255, 0.2); }
   color: #fff; font-family: var(--font); font-weight: 500; letter-spacing: 0;
   --lead-fs: clamp(34px, min(5vw, 9svh), 76px);
   font-size: var(--lead-fs); line-height: 1.12;
+  text-shadow: 0 2px 26px rgba(0, 0, 0, 0.45), 0 1px 3px rgba(0, 0, 0, 0.25);
 }
+/* veils over the case's first screen: top behind the headline, bottom behind the name */
+.cd-hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.18) 28%, transparent 46%),
+    linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) 22%, transparent 40%);
+}
+.cd-hero > * { position: relative; z-index: 1; }
+.cd-hero > .cd-hero__lead { position: absolute; }
 .cd-lead__h { margin: 0; font: inherit; }
 .cd-lead__h span { display: block; white-space: nowrap; }
 .cd-lead__sub { margin: 0.18em 0 0; font-size: 0.424em; font-weight: 400; line-height: 1.3; opacity: 0.85; }
@@ -627,7 +639,7 @@ html.menu-open .island .island__edge path { stroke: rgba(255, 255, 255, 0.2); }
   .cd-hero__lead { --lead-fs: clamp(34px, 9.4vw, 46px); line-height: 1.08; top: clamp(96px, 17svh, 180px); }
 }
 /* the copy that flies over from the carousel card (see case.js): same text, fixed to the screen */
-.cd-fly { position: fixed !important; z-index: 55; margin: 0; transform-origin: 0 0; pointer-events: none; }
+.cd-fly { position: fixed !important; z-index: 55; margin: 0; transform-origin: 0 0; pointer-events: none; text-shadow: 0 2px 26px rgba(0, 0, 0, 0.45), 0 1px 3px rgba(0, 0, 0, 0.25); }
 .cd-fly .cd-lead__h span { white-space: nowrap; }
 
 /* ---------- real photos ---------- */
