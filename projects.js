@@ -289,6 +289,12 @@ window.PROJECTS = [
   },
 ];
 
+// The order the cases appear in, both in the carousel and in the list below the fold: the strongest
+// pictures first (the list opens with the first one, wide, then goes in pairs). The carousel loops, so the
+// last one peeks in on the left of the first: that one has to look good too.
+const CASE_ORDER = ['mari-maria', 'all-pendre', 'astre', 'velle', 'so-connected', 'cinco', 'altare', 'sens8', 'oficina-ceramica', 'estudio-ilha', 'cantao', 'botanico'];
+PROJECTS.sort((a, b) => CASE_ORDER.indexOf(a.slug) - CASE_ORDER.indexOf(b.slug));
+
 // Photos taken from the Verso deck, to see how the real thing will look (an experiment: they can
 // repeat and be swapped freely). `hero` feeds the carousel card, the case card and the first screen
 // of the case page; `focus` is where, vertically, a wide crop of a tall photo should centre.

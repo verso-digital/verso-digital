@@ -1,7 +1,7 @@
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const isTouch = matchMedia('(pointer: coarse)').matches;
-const START_INDEX = 1;   // Cantão
+const START_INDEX = 0;   // the first case in CASE_ORDER (projects.js)
 
 // ---------- carousel ----------
 const carousel = createCarousel({
