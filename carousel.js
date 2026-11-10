@@ -238,6 +238,16 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
       u.uCoverScale.value.copy(cover);
       u.uRadiusPx.value = radiusPx;
     });
+    // resizing the renderer wipes the canvas: draw it again now, even if the loop is paused (a case page
+    // open over a frozen slide, the phone's address bar showing or hiding), or the picture goes blank
+    drawNow();
+  }
+
+  // one frame right away, whatever the pause state (see `force` in frame())
+  let force = false, started = false;
+  function drawNow() {
+    force = true;
+    if (started) { try { frame(0, 16.7); } catch (e) { /* drawn by the next tick instead */ } }
   }
 
   // Arc position/rotation/scale of slide r. `arcOpen` morphs a flat row into the arc.
@@ -382,8 +392,9 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
   // ---------- frame loop ----------
   let activeIndex = -1;
   function frame(_, deltaMs) {
-    if (frozen || !onScreen) return;
-    const k = 1 - Math.pow(1 - EASE, Math.min(deltaMs, 50) / 16.667);
+    if ((frozen || !onScreen) && !force) return;
+    force = false;
+    const k =1 - Math.pow(1 - EASE, Math.min(deltaMs, 50) / 16.667);
     state.pos += (state.target - state.pos) * k;
     state.vel += ((state.pos - state.prev) - state.vel) * 0.12;
     state.prev = state.pos;
@@ -448,6 +459,7 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
   addEventListener('resize', layout);
   renderer.compile(scene, camera);   // build the shader program up front
   gsap.ticker.add(frame);
+  started = true;
 
   return {
     ready,
@@ -472,7 +484,7 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
       return new Promise((res) => gsap.to(cover, { p: 0, duration, ease: 'expo.inOut', overwrite: 'auto', onComplete: () => { cover.i = -1; res(); } }));
     },
     // jump straight to the opened state for slide `i` (used when a card, not the carousel, opens the case)
-    setCover(i, p = 1) { cover.i = i; cover.p = p; cover.b = p > 0 ? 1 : 0; frozen = false; },
+    setCover(i, p = 1) { cover.i = i; cover.p = p; cover.b = p > 0 ? 1 : 0; frozen = false; drawNow(); },
     isMobile: () => mobile,
     // the picture of slide i without text, exactly as it is drawn on the full-screen slide
     barePicture: (i) => bareTextures[i].image,
@@ -506,7 +518,7 @@ window.createCarousel = function createCarousel({ container, projects, onActive,
     },
     get covered() { return cover.i; },
     // a full-screen slide doesn't change, so stop redrawing it while the case page scrolls over it
-    freeze() { frozen = true; },
+    freeze() { if (force || !onScreen) drawNow(); frozen = true; },
     resume() { frozen = false; },
     relayout: () => layout(),
     // cinematic entrance: slides fade/scale in while the arc opens
