@@ -30,7 +30,7 @@ window.Menu = (function () {
     isOpen = true;
     root.classList.add('menu-open');
     btn.setAttribute('aria-expanded', 'true');
-    btn.setAttribute('aria-label', 'Fechar menu');
+    btn.setAttribute('aria-label', ((window.I18N || {}).closeMenu || 'Fechar menu'));
     menu.setAttribute('aria-hidden', 'false');
     tl?.kill();
     tl = gsap.timeline();
@@ -49,7 +49,7 @@ window.Menu = (function () {
     if (!isOpen) return;
     isOpen = false;
     btn.setAttribute('aria-expanded', 'false');
-    btn.setAttribute('aria-label', 'Abrir menu');
+    btn.setAttribute('aria-label', (window.I18N || {}).openMenu || 'Abrir menu');
     menu.setAttribute('aria-hidden', 'true');
     tl?.kill();
     tl = gsap.timeline({

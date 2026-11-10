@@ -37,13 +37,14 @@ window.Motion = (function () {
 
   // ---------- numbers that count up ----------
   function countUp(el, scrollTrigger) {
-    const m = el.textContent.trim().match(/^([^\d]*)(\d[\d.]*)(.*)$/);
+    const m = el.textContent.trim().match(/^([^\d]*)(\d[\d.,]*)(.*)$/);
     if (!m) return null;
     const [, pre, num, post] = m;
     if (/[a-z]/i.test(pre + post)) return null;   // "B2B" is a name, not a number to count
-    const end = parseFloat(num.replace('.', ''));
+    const sep = /\d[.,]\d{3}/.test(num);   // 1.216.545 / 1,216,545: the dots or commas are thousands separators
+    const end = parseFloat(sep ? num.replace(/[.,]/g, '') : num);
     const obj = { v: 0 };
-    const paint = () => { el.textContent = pre + Math.round(obj.v) + post; };
+    const paint = () => { const n = Math.round(obj.v); el.textContent = pre + (sep ? n.toLocaleString(document.documentElement.lang === 'en' ? 'en-US' : 'pt-BR') : n) + post; };
     paint();
     return gsap.to(obj, { v: end, duration: 1.8, ease: 'power3.out', onUpdate: paint, scrollTrigger });
   }

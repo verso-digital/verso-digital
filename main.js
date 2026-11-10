@@ -40,7 +40,7 @@ if (!isTouch) {
     const overStage = over && over.closest('#stage');
     let next = '';
     if (custom) next = custom.dataset.cursor;
-    else if (overStage) next = carousel.hovered !== null ? 'Ver' : 'Arraste';
+    else if (overStage) next = carousel.hovered !== null ? ((window.I18N || {}).view || 'Ver') : ((window.I18N || {}).drag || 'Arraste');
     cursor.classList.toggle('is-dark', !!custom);
     if (next === mode) return;
     mode = next;
@@ -93,7 +93,7 @@ function whenReady(wireSections = true) {
   // "loaded" is judged by the load event; Image.decode() can stall in a tab that isn't being shown
   const photo = new Image();
   const photoIn = new Promise((res) => { photo.onload = photo.onerror = res; });
-  photo.src = 'bg.webp';
+  photo.src = ((window.I18N && window.I18N.base) || '') + 'bg.webp';
   if (photo.complete) photo.onload = null;
   const everything = Promise.all([
     document.fonts.ready,

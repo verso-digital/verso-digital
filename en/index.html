@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en" class="is-loading">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verso Digital — Strategy, brand and digital presence</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <meta property="og:title" content="Verso Digital — Strategy, brand and digital presence">
+  <meta property="og:image" content="https://leo-neri.github.io/verso-digital/assets/og.jpg">
+  <meta property="og:type" content="website">
+  <meta name="description" content="Verso is a strategy, branding and digital presence agency for brands that want to be remembered.">
+  <script>
+    /* The opening animation is for the first visit. Once it has played in this tab, reloads (F5) and
+       returning to the site skip it. This runs before anything is painted, so the page can show up
+       already in its final state: no loader, no "hidden until ready". (A reload on a case page keeps
+       the hidden state until the case itself is restored.) The scroll position is put back by the
+       page, not by the browser, which would do it before the content exists. */
+    try {
+      history.scrollRestoration = 'manual';
+      if (sessionStorage.getItem('verso-intro') === '1') {
+        var r = document.documentElement;
+        r.classList.add('skip-intro');
+        if (!/^#\/cases\//.test(location.hash)) r.classList.remove('is-loading');
+      }
+    } catch (e) {}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+  <!-- fixed, heavily blurred backdrop; a dark scrim keeps text readable on top -->
+  <div class="backdrop" aria-hidden="true">
+    <div class="backdrop__img"></div>
+    <div class="backdrop__sharp" id="backdropSharp"></div>
+    <div class="backdrop__scrim" id="backdropScrim"></div>
+  </div>
+
+  <!-- loader: a white sheet with the wordmark typed on it. The centre of the "o" is a hole in the
+       sheet that shows the sharp photo; on load that hole grows until it uncovers the page.
+       loader.js draws the letters into #logoLayer and the aperture into #holeLayer. -->
+  <svg class="loader" id="loader" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <mask id="sheetMask" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%">
+        <rect width="100%" height="100%" fill="#fff"/>
+        <g id="holeLayer"></g>
+        <ellipse id="ellipseHole" fill="#000" opacity="0"/>
+      </mask>
+    </defs>
+    <rect width="100%" height="100%" fill="#fff" mask="url(#sheetMask)"/>
+    <g id="logoLayer"></g>
+  </svg>
+
+  <!-- Desktop header: logo on the left, navigation on the right. Phones get the island menu below instead. -->
+  <header class="header" id="header">
+    <a class="logo" href="#top" data-scroll aria-label="Verso Digital — home"></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#cases" data-scroll>Cases</a>
+      <a href="#criadoras" data-scroll>About</a>
+      <a href="#contato" data-scroll>Contact</a>
+      <a class="lang" href="../" hreflang="pt-BR" lang="pt-BR" aria-label="Ler este site em português"><span>PT</span><i></i><b>EN</b></a>
+      <a href="https://wa.me/5511971240071?text=Hi!%20I%20came%20from%20the%20Verso%20Digital%20website%20and%20would%20like%20to%20talk%20about%20my%20brand." target="_blank" rel="noopener" data-external>WhatsApp</a>
+    </nav>
+  </header>
+
+  <!-- Phone menu, "dynamic island" style: a trapezoid with the logo hangs from the top edge, a button of the
+       same size floats at the bottom. Both are windows onto the sharp photo (see menu.js). -->
+  <a class="island" id="island" href="#top" aria-label="Verso Digital — home">
+    <span class="island__shadow" aria-hidden="true"></span>
+    <span class="island__shape"><span class="island__logo"></span></span>
+    <svg class="island__edge" viewBox="0 0 145 41" width="145" height="41" aria-hidden="true"><path d="M0 0 C7.5 0 11.25 2.7 13.75 8 L17.5 27.6 C19.4 35.6 25 41 35 41 L110 41 C120 41 125.6 35.6 127.5 27.6 L131.25 8 C133.75 2.7 137.5 0 145 0" fill="none"/></svg>
+  </a>
+
+  <div class="menu-veil" id="menuVeil" aria-hidden="true"></div>
+  <nav class="menu" id="menu" aria-label="Main" aria-hidden="true">
+    <a href="#cases">Cases</a>
+    <a href="#criadoras">About</a>
+    <a href="#contato">Contact</a>
+    <a class="lang" href="../" hreflang="pt-BR" lang="pt-BR" aria-label="Ler este site em português"><span>PT</span><i></i><b>EN</b></a>
+    <a href="https://wa.me/5511971240071?text=Hi!%20I%20came%20from%20the%20Verso%20Digital%20website%20and%20would%20like%20to%20talk%20about%20my%20brand." target="_blank" rel="noopener" data-external>WhatsApp</a>
+  </nav>
+  <div class="dock" id="dock">
+    <button class="dock__btn" id="dockBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+      <span class="dock__icon" aria-hidden="true"><i></i><i></i></span>
+    </button>
+  </div>
+
+  <main id="top">
+    <!-- Hero: curved WebGL carousel -->
+    <section class="hero" id="hero">
+      <div class="stage" id="stage" aria-label="Selected cases"></div>
+
+      <div class="hero__ui">
+        <span class="hint" id="hint">Drag or use ← →</span>
+      </div>
+    </section>
+
+    <!-- Everything below the fold sits on one calm sheet of paper, so the work can be the loud part -->
+    <div class="paper">
+
+      <!-- Quem somos -->
+      <section class="intro" id="sobre">
+        <p class="eyebrow">Verso Digital · Strategy, brand and presence</p>
+        <h2 class="manifesto" id="manifesto">
+          We are Verso. First we decide what to say<i class="pill-img" data-pos="12% 30%"></i>, then how to look<i class="pill-img" data-pos="78% 62%"></i> and, finally, how to be present every day<i class="pill-img" data-pos="45% 85%"></i>. It is work that happens in order and that the public only sees at the end, when everything looks obvious.
+        </h2>
+
+        <div class="quiet">
+          <p class="quiet__label">About this site</p>
+          <p class="quiet__text">Our identity is strong, but the site is discreet on purpose. Neutral tones, calm typography and plenty of room to breathe: here the protagonist is our clients’ work. We just set the stage.</p>
+        </div>
+      </section>
+
+      <!-- Cases -->
+      <section class="cases" id="cases">
+        <header class="section-head">
+          <h2 class="section-title">Cases</h2>
+          <p class="section-note">Stories of brands that gained presence, each in its own way.</p>
+        </header>
+        <div class="cases__grid" id="casesGrid"></div>
+      </section>
+
+      <!-- Criadoras -->
+      <section class="team" id="criadoras">
+        <header class="section-head">
+          <h2 class="section-title">Who is behind it</h2>
+          <p class="section-note">Two founders, one ruler: clarity before noise.</p>
+        </header>
+        <div class="team__cards">
+          <article class="person">
+            <div class="person__photo"><img src="../assets/marina.jpg" alt="Marina Paiva" width="724" height="904" loading="lazy"></div>
+            <div class="person__body">
+              <span class="person__role">Co-founder · Strategy</span>
+              <h3 class="person__name">Marina Paiva</h3>
+              <p class="person__bio">She comes from the digital marketing of brands such as Schutz, Bloomberg and Genial Investimentos, where she handled events, content, seeding and campaign monitoring. She founded Verso to give brands a digital presence that only they could have.</p>
+            </div>
+          </article>
+          <article class="person">
+            <div class="person__photo"><img src="../assets/maria-eduarda.jpg" alt="Maria Eduarda Franco" width="724" height="904" loading="lazy"></div>
+            <div class="person__body">
+              <span class="person__role">Co-founder · Creative direction</span>
+              <h3 class="person__name">Maria Eduarda Franco</h3>
+              <p class="person__bio">An advertising professional with a postgraduate degree in art direction, she has worked at agencies and startups such as Iguatemi, Naked Nuts and NIINI. She leads the creative vision: translating what each brand is into campaigns and identities that make sense for it, and only for it.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Serviços -->
+      <section class="services" id="servicos">
+        <header class="section-head">
+          <h2 class="section-title">What we do</h2>
+          <p class="section-note">Three fronts that fit together. You can start with any of them.</p>
+        </header>
+        <ul class="acc" id="acc">
+          <li class="acc__item is-open">
+            <button class="acc__head" type="button" aria-expanded="true">
+              <span class="acc__n">01</span>
+              <span class="acc__title">Strategy</span>
+              <span class="acc__lead">Where the brand decides what to say.</span>
+              <span class="acc__icon" aria-hidden="true"></span>
+            </button>
+            <div class="acc__panel"><div class="acc__inner">
+              <p>Positioning, narrative and a growth plan, so every communication decision has a reason.</p>
+              <ul class="tags"><li>Brand positioning</li><li>Communication strategy</li><li>Content planning</li><li>Strategic consulting</li><li>Launches</li></ul>
+            </div></div>
+          </li>
+          <li class="acc__item">
+            <button class="acc__head" type="button" aria-expanded="false">
+              <span class="acc__n">02</span>
+              <span class="acc__title">Branding &amp; Creative direction</span>
+              <span class="acc__lead">Where the brand decides how to look.</span>
+              <span class="acc__icon" aria-hidden="true"></span>
+            </button>
+            <div class="acc__panel"><div class="acc__inner">
+              <p>Identity, visual universe and voice, with the same signature at every touchpoint, from the seal to the packaging.</p>
+              <ul class="tags"><li>Branding</li><li>Visual identity</li><li>Naming</li><li>Tone of voice</li><li>Creative direction</li><li>Campaign direction</li><li>Packaging</li><li>Content direction</li></ul>
+            </div></div>
+          </li>
+          <li class="acc__item">
+            <button class="acc__head" type="button" aria-expanded="false">
+              <span class="acc__n">03</span>
+              <span class="acc__title">Execution &amp; Management</span>
+              <span class="acc__lead">Where the brand shows up every day.</span>
+              <span class="acc__icon" aria-hidden="true"></span>
+            </button>
+            <div class="acc__panel"><div class="acc__inner">
+              <p>The routine that keeps the brand alive: we plan, produce, publish and measure, without letting the identity slip.</p>
+              <ul class="tags"><li>Social media</li><li>Editorial planning</li><li>Content production</li><li>Design</li><li>Motion design</li><li>Photo and video</li><li>Community management</li><li>Paid traffic</li><li>Reporting and optimisation</li><li>Executive production</li></ul>
+            </div></div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Marcas -->
+      <section class="brands" aria-label="Brands we have worked with">
+        <p class="eyebrow brands__label">Brands we have worked with</p>
+        <div class="marquee">
+          <div class="marquee__track" id="marquee"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Contato -->
+  <footer class="footer" id="contato">
+    <div class="footer__top">
+      <p class="eyebrow eyebrow--light">Contact</p>
+      <h2 class="footer__title">Shall we talk about your brand?</h2>
+    </div>
+
+    <div class="footer__cols">
+      <form class="form" id="contactForm" novalidate>
+        <label class="field"><span>Your name</span><input name="nome" type="text" autocomplete="name" required></label>
+        <label class="field"><span>Email</span><input name="email" type="email" autocomplete="email" required></label>
+        <label class="field"><span>Tell us a little about the brand</span><textarea name="mensagem" rows="2" required></textarea></label>
+        <button class="btn" type="submit"><span class="btn__label">Send message</span><span class="btn__arrow" aria-hidden="true">→</span></button>
+        <p class="form__ok" id="formOk" role="status" hidden>Received! We will reply shortly.</p>
+      </form>
+
+      <div class="direct">
+        <p class="direct__label">Or talk directly</p>
+        <a class="direct__link" href="mailto:contato@versodigitalagency.com">contato@versodigitalagency.com</a>
+        <a class="direct__link" href="https://wa.me/5511971240071" target="_blank" rel="noopener">+55 11 97124-0071</a>
+        <a class="direct__link" href="https://instagram.com/versodigital_" target="_blank" rel="noopener">@versodigital_</a>
+      </div>
+    </div>
+
+    <div class="footer__mark" id="footerMark" aria-hidden="true"></div>
+    <div class="footer__row">
+      <span>© 2026 Verso Digital</span>
+      <a href="#top" data-scroll>Back to top ↑</a>
+    </div>
+  </footer>
+
+  <!-- Case page: opens over the site when a case is clicked (see case.js) -->
+  <div class="cd" id="case" hidden role="dialog" aria-label="Case">
+    <button class="cd-ball" id="cdBack" type="button" aria-label="Close case">
+      <span class="cd-ball__x" aria-hidden="true"><i></i><i></i></span>
+    </button>
+    <div id="cdContent"></div>
+  </div>
+
+  <div class="cursor" id="cursor" aria-hidden="true"><span id="cursorLabel">Drag</span></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+  <script src="../projects.js"></script>
+  <script src="../en.js"></script>
+  <script src="../logo.js"></script>
+  <script src="../loader.js"></script>
+  <script src="../nudge.js"></script>
+  <script src="../carousel.js"></script>
+  <script src="../sections.js"></script>
+  <script src="../motion.js"></script>
+  <script src="../case.js"></script>
+  <script src="../main.js"></script>
+  <script src="../menu.js"></script>
+</body>
+</html>

@@ -7,7 +7,7 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
 const BRANDS = [
   'Riachuelo', 'Allpendre', 'LoveWorkz', 'A Oficina Cerâmica', 'Cinco', 'Kalimo', 'The Vault',
-  'Laneige', 'Beit Engenharia', 'Cantão', 'Velle', 'Altare', 'Heavy House', 'Rare Beauty', 'Botânico Bar',
+  'Laneige', 'Beit Engenharia', 'Cantão', 'Velle', 'Altare', 'Heavy House', 'Rare Beauty', 'Bar Botânico', 'Mari Maria', 'Scherbis',
   'Brisa', 'Épice', 'Valentina Gorentzvaig', 'So.Connected',
 ];
 
@@ -27,7 +27,7 @@ function buildSections() {
   // heights, and a lone last one set in from the sides (see the c-* classes)
   const caseHtml = (p, cls, index) => `
     <article class="case ${cls}" data-cursor="Ver" data-index="${index}">
-      <a class="case__link" href="#/cases/${p.slug}" aria-label="Ver o case ${p.name}">
+      <a class="case__link" href="#/cases/${p.slug}" aria-label="${(window.I18N || {}).viewCase || 'Ver o case'} ${p.name}">
         <div class="case__media" style="--c1:${p.colors[0]};--c2:${p.colors[1]}">
           <div class="case__img ph-${p.images ? 'photo' : 'none'}" style="${p.images ? `background-image:url(${p.images.card || p.images.hero});--focus:${p.images.card ? 50 : Math.round(p.images.focus * 100)}%` : ''}"></div>
           ${p.images ? '' : '<span class="case__ph">Imagem do case</span>'}
@@ -82,8 +82,14 @@ function buildSections() {
       if (!valid) ok = false;
     });
     if (!ok) return;
-    form.reset();
+    const data = new FormData(form);
     const msg = $('#formOk');
+    const btn = $('button[type=submit]', form);
+    if (btn) btn.disabled = true;
+    fetch('https://formsubmit.co/ajax/contato@versodigitalagency.com', { method: 'POST', headers: { Accept: 'application/json' }, body: data })
+      .catch(() => null)
+      .then(() => { if (btn) btn.disabled = false; });
+    form.reset();
     msg.hidden = false;
     gsap.fromTo(msg, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
   });

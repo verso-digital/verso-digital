@@ -643,3 +643,12 @@ html.menu-open .island .island__edge path { stroke: rgba(255, 255, 255, 0.2); }
   /* centred on the island's band: never above the screen, never below the trapezoid's bottom edge */
   .cd-ball { top: calc((var(--island-h) - var(--x-size)) / 2); }
 }
+
+/* ---------- language switch (PT | EN) ---------- */
+.lang { display: inline-flex; align-items: center; gap: 7px; letter-spacing: 0.04em; font-size: 13px; }
+.lang b { font-weight: 600; }
+.lang span { opacity: 0.6; }
+.lang i { width: 1px; height: 11px; background: currentColor; opacity: 0.45; }
+.lang::after { display: none; }
+.lang:hover span { opacity: 1; }
+.menu .lang { font-size: 14px; padding-top: 8px; }

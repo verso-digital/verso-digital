@@ -67,11 +67,11 @@ window.CaseView = (function () {
 
       <div class="cd-sheet">
         <section class="cd-intro">
-          <p class="eyebrow">Case · ${p.tag}</p>
+          <p class="eyebrow">${(window.I18N || {}).caseLabel || 'Case'} · ${p.tag}</p>
           <p class="cd-intro__lead">${d.lead}</p>
           <div class="cd-meta">
-            <div><span class="cd-meta__k">Serviços</span><ul class="tags">${d.services.map((s) => `<li>${s}</li>`).join('')}</ul></div>
-            <div><span class="cd-meta__k">Frente</span><p>${p.tag}</p></div>
+            <div><span class="cd-meta__k">${(window.I18N || {}).services || 'Serviços'}</span><ul class="tags">${d.services.map((s) => `<li>${s}</li>`).join('')}</ul></div>
+            <div><span class="cd-meta__k">${(window.I18N || {}).front || 'Frente'}</span><p>${p.tag}</p></div>
           </div>
         </section>
 
@@ -85,13 +85,13 @@ window.CaseView = (function () {
         <section class="cd-next">
           <a class="cd-next__link" href="#/cases/${next.slug}" data-next data-cursor="Ver" style="--c1:${next.colors[0]};--c2:${next.colors[1]}">
             <div class="cd-next__bg" style="${next.images ? `background-image:linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.5)),url(${next.images.card || next.images.hero})` : ''}"></div>
-            <span class="cd-next__label">Próximo case</span>
+            <span class="cd-next__label">${(window.I18N || {}).next || 'Próximo case'}</span>
             <span class="cd-next__name">${next.name}</span>
             <span class="cd-next__tag">${next.tag}</span>
           </a>
           <div class="cd-cta">
             <p>Quer um case assim para a sua marca?</p>
-            <a class="btn" href="#contato" data-contact><span class="btn__label">Falar com a Verso</span><span class="btn__arrow" aria-hidden="true">→</span></a>
+            <a class="btn" href="#contato" data-contact><span class="btn__label">${(window.I18N || {}).talk || 'Falar com a Verso'}</span><span class="btn__arrow" aria-hidden="true">→</span></a>
           </div>
         </section>
       </div>`;

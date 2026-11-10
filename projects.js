@@ -125,7 +125,7 @@ window.PROJECTS = [
     name: 'Estúdio Ilha',
     slug: 'estudio-ilha',
     short: { headline: ['Uma ilha','em azul.'] },   // phones: a shorter headline
-    tag: 'Branding e direção criativa',
+    tag: 'Social media',
     colors: ['#1a1f9c', '#dfe6f7'],
     headline: ['Um estúdio', 'todo em azul.'],
     sub: 'Campanha, cenário e acervo.',
@@ -134,7 +134,7 @@ window.PROJECTS = [
     text: 'Um estúdio de objetos e cenários com identidade em azul cobalto. Da campanha de fragrância ao acervo catalogado, tudo na mesma linguagem.',
     detail: {
       lead: 'Um estúdio de objetos e cenários que precisava de uma identidade tão marcante quanto o seu acervo. Criamos peças em azul cobalto, com tipografia grande e imagens tratadas em duotone.',
-      services: ['Branding', 'Direção criativa', 'Design', 'Campanha'],
+      services: ['Estratégia de conteúdo', 'Direção criativa', 'Design', 'Gestão de comunidade'],
       sections: [
         { kicker: 'A identidade', title: 'Um azul só, aplicado com coragem', text: 'O nome em letras enormes, o azul cobalto e um símbolo simples. A marca se reconhece antes mesmo de ser lida.' },
         { kicker: 'O acervo', title: 'Objetos de cenário, catalogados', text: 'Poltronas, espelhos, luminárias e toca-discos organizados como um inventário ilustrado: cada objeto com nome e origem.' },
@@ -201,7 +201,7 @@ window.PROJECTS = [
     headline: ['Cultura que vira', 'conversa de marca.'],
     sub: 'Música, moda e parcerias em carrossel.',
     cta: 'Ver case',
-    stat: { value: 'Cultura', label: 'conteúdo que conecta música, moda e marcas' },
+    stat: { value: '1.216.545', label: 'views orgânicos em 1 ano' },
     text: "Posts de carrossel do perfil da própria So.Connected, em inglês, sobre parcerias e movimentos culturais. Os artistas e as marcas que aparecem são assunto do perfil.",
     detail: {
       lead: 'A So.Connected trabalha na interseção entre música, moda e marcas. Criamos posts de carrossel que explicam parcerias, contam histórias e apresentam números, sempre em tom de conversa.',
@@ -211,17 +211,17 @@ window.PROJECTS = [
         { kicker: 'Moda e música', title: 'Quando o artista veste o argumento', text: 'Posts editoriais que mostram como roupa e som contam a mesma história, com fotos recortadas, notas e uma pergunta para abrir a conversa.' },
         { kicker: 'BRESH', title: 'Uma festa global chega ao Brasil', text: 'Cores fortes, mascote e números grandes para apresentar a BRESH ao público brasileiro: de onde veio, quanto cresceu e por que importa agora.' },
       ],
-      result: { big: 'Cultura', text: 'posts que transformam parcerias e movimentos culturais em conversa de marca.' },
+      result: { big: '1.216.545', text: 'views orgânicos em um ano, com conteúdo próprio que transforma movimentos culturais em conversa.' },
     },
   },
   {
-    name: 'Botânico',
+    name: 'Bar Botânico',
     slug: 'botanico',
     short: { headline: ['Sabor','em foco.'] },   // phones: a shorter headline
     tag: 'Fotografia e conteúdo',
     colors: ['#4a2a14', '#d7a35b'],
     headline: ['Comida que', 'dá vontade.'],
-    sub: 'Ensaio de cardápio para o Botânico Bar.',
+    sub: 'Ensaio de cardápio para o Bar Botânico.',
     cta: 'Ver case',
     stat: { value: 'Sabor', label: 'ensaio de fotos do cardápio' },
     text: 'Um ensaio de cardápio com luz quente, mesa de madeira e pratos para dividir. As fotos servem ao feed, ao delivery e ao salão.',
@@ -272,7 +272,7 @@ window.PROJECTS = [
 // of the case page; `focus` is where, vertically, a wide crop of a tall photo should centre.
 const PHOTO_FOCUS = { 'all-pendre': 0.5, cantao: 0.12, sens8: 0.5, cinco: 0.5, 'oficina-ceramica': 0.4, 'estudio-ilha': 0.5, velle: 0.5, astre: 0.35, 'so-connected': 0.3, botanico: 0.5, altare: 0.5 };
 // bump this whenever a picture is replaced, so phones and the CDN fetch the new file instead of the cached one
-const ASSET_V = 18;
+const ASSET_V = 19;
 const PHOTO_CARD = { cantao: true, sens8: true, 'oficina-ceramica': true, 'so-connected': true, astre: true, altare: true };
 const PHOTO_RATIO = { sens8: 1, botanico: 0.667 };
 const SECTION_RATIOS = {   // overrides, per section: width / height of the picture
