@@ -187,9 +187,11 @@ window.I18N = { base: '../', services: 'Services', front: 'Focus', talk: 'Talk t
     p.detail.lead = t.lead; p.detail.services = t.services;
     p.detail.sections = t.sections.map((s, i) => Object.assign({}, p.detail.sections[i] || {}, s));
     p.detail.result = { big: t.result[0], text: t.result[1] };
+    const GT = { cantao: 'How to sell jeans, in seven posts', 'so-connected': 'The Latin music carousel', 'estudio-ilha': 'Posts from the Heineken campaign', 'oficina-ceramica': 'From clay to piece: process and result' };
     const up = (u) => (u ? '../' + u : u);
     p.images.card = up(p.images.card); p.images.hero = up(p.images.hero);
     p.images.heroPortrait = up(p.images.heroPortrait); p.images.heroLandscape = up(p.images.heroLandscape);
     p.detail.sections.forEach((s) => { s.image = up(s.image); });
+    if (p.gallery) { p.gallery.title = GT[p.slug]; p.gallery.items = p.gallery.items.map(up); }
   });
 })();

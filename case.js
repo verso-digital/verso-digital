@@ -77,6 +77,8 @@ window.CaseView = (function () {
 
         ${sections}
 
+        ${p.gallery ? `<section class="cd-gal"><h2 class="cd-gal__h">${p.gallery.title}</h2><div class="cd-gal__track" style="--ar:${p.gallery.ratio}">${p.gallery.items.map((u, n) => `<img src="${u}" alt="${p.name} ${n + 1}" loading="lazy" draggable="false">`).join('')}</div></section>` : ''}
+
         <section class="cd-result" style="--c1:${p.colors[0]}">
           <span class="cd-result__big">${d.result.big}</span>
           <p class="cd-result__text">${d.result.text}</p>

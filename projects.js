@@ -272,7 +272,7 @@ window.PROJECTS = [
 // of the case page; `focus` is where, vertically, a wide crop of a tall photo should centre.
 const PHOTO_FOCUS = { 'all-pendre': 0.5, cantao: 0.12, sens8: 0.5, cinco: 0.5, 'oficina-ceramica': 0.4, 'estudio-ilha': 0.5, velle: 0.5, astre: 0.35, 'so-connected': 0.3, botanico: 0.5, altare: 0.5 };
 // bump this whenever a picture is replaced, so phones and the CDN fetch the new file instead of the cached one
-const ASSET_V = 19;
+const ASSET_V = 20;
 const PHOTO_CARD = { cantao: true, sens8: true, 'oficina-ceramica': true, 'so-connected': true, astre: true, altare: true };
 const PHOTO_RATIO = { sens8: 1, botanico: 0.667 };
 const SECTION_RATIOS = {   // overrides, per section: width / height of the picture
@@ -280,10 +280,20 @@ const SECTION_RATIOS = {   // overrides, per section: width / height of the pict
   astre: [0.8, 0.8, 0.8, 1, 1, 0.667],
   altare: [0.8, 1.778, 0.8, 1.778, 1.778, 1.778, 1.778, 1.778],
   sens8: [1.778, 1.778, 1.778, 1.778, 1.778, 1.778, 1.778, 1.778],
+  'oficina-ceramica': [0, 0.75, 0.75],
+};
+// strips of posts / photos shown before the result: slug -> [how many pictures, title, ratio]
+const GALLERY = {
+  cantao: [7, 'Como vender jeans, em sete posts', 0.8],
+  'so-connected': [9, 'O carrossel sobre música latina', 0.8],
+  'estudio-ilha': [5, 'Posts da campanha Heineken', 0.8],
+  'oficina-ceramica': [8, 'Do barro à peça: processo e resultado', 0.75],
 };
 PROJECTS.forEach((p) => {
   if (PHOTO_RATIO[p.slug]) p.imageRatio = PHOTO_RATIO[p.slug];
   const own = PHOTO_CARD[p.slug];   // pictures cut for the carousel card: one for phones, one for wide screens
   p.images = { card: `assets/cases/${p.slug}-card.jpg?v=${ASSET_V}`, heroPortrait: own && `assets/cases/${p.slug}-card-m.jpg?v=${ASSET_V}`, heroLandscape: own && `assets/cases/${p.slug}-card-d.jpg?v=${ASSET_V}`, hero: `assets/cases/${p.slug}-hero.jpg?v=${ASSET_V}`, focus: PHOTO_FOCUS[p.slug] };
+  const g = GALLERY[p.slug];
+  if (g) p.gallery = { title: g[1], ratio: g[2], items: Array.from({ length: g[0] }, (_, k) => `assets/cases/${p.slug}-g${k + 1}.jpg?v=${ASSET_V}`) };
   p.detail.sections.forEach((s, k) => { s.image = `assets/cases/${p.slug}-s${k + 1}.jpg?v=${ASSET_V}`; const r = SECTION_RATIOS[p.slug]; if (r && r[k]) s.ratio = r[k]; });
 });

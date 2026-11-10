@@ -652,3 +652,18 @@ html.menu-open .island .island__edge path { stroke: rgba(255, 255, 255, 0.2); }
 .lang::after { display: none; }
 .lang:hover span { opacity: 1; }
 .menu .lang { font-size: 14px; padding-top: 8px; }
+
+/* ---------- gallery strip (posts / photos in a row) ---------- */
+.cd-gal { padding: clamp(40px, 8svh, 100px) 0 clamp(28px, 6svh, 80px); }
+.cd-gal__h { padding: 0 var(--gutter); margin: 0 0 clamp(18px, 3svh, 32px); font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(26px, 3.4vw, 46px); line-height: 1.05; }
+.cd-gal__track {
+  display: flex; gap: clamp(10px, 1.4vw, 20px); overflow-x: auto; padding: 0 var(--gutter);
+  scroll-snap-type: x mandatory; scroll-padding: 0 var(--gutter); -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.cd-gal__track::-webkit-scrollbar { display: none; }
+.cd-gal__track img {
+  flex: none; height: clamp(300px, 62svh, 640px); width: auto; aspect-ratio: var(--ar, 0.8); object-fit: cover;
+  border-radius: 6px; scroll-snap-align: start; background: rgba(0, 0, 0, 0.06);
+}
+@media (max-width: 767px) { .cd-gal__track img { height: auto; width: 76vw; } }
