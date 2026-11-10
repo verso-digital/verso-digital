@@ -215,6 +215,7 @@ window.CaseView = (function () {
     Object.assign(clone.style, {
       position: 'fixed', margin: '0', zIndex: '70', transform: 'none', clipPath: 'none', maxHeight: 'none',
       pointerEvents: 'none', boxShadow: 'none', transition: 'none',
+      visibility: 'visible',   // the card itself is hidden while its case is open; its copy must not inherit that
     });
     return clone;
   }
